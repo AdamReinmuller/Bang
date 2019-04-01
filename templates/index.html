@@ -1,0 +1,25 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+<p class="h1 text-center">Memory Game</p>
+<p class="text-center">How many different cards would you like to play with</p>
+
+<div class="text-center">
+<div class="btn-group">
+  <button type="button" class="btn btn-outline-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Choose
+  </button>
+  <div class="dropdown-menu">
+        {% for i in range(1, 21) %}
+    <a class="dropdown-item" href="/game?card-number={{ i }}">{{ i }}</a>
+        {% endfor %}
+  </div>
+</div>
+</div>
+
+
+
+
+
+{% endblock %}
