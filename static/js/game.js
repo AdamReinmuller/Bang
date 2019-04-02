@@ -28,11 +28,22 @@ function shuffleCards(array) {
 class Player { //cards: dictionary
     constructor(hp, role, position, range, features, cards) {
         this.hp = hp;
+        this.hpImage = this.getHpImage();
         this.role = role;
+        this.roleImage = this.getRoleImage();
         this.range = range;
         this.position = position;
         this.hand = new Cards(cards);
         this.features = features;
+    }
+
+    getHpImage() {
+        return `static/images/${this.hp}hp.png`
+    }
+
+    getRoleImage() {
+        if (this.role === 'Sheriff')
+        return `static/images/Sheriff`
     }
 
     bang(target) {
@@ -103,7 +114,7 @@ class Cards {
 }
 
 
-let bang2miss2 = {'bang': 2, 'missed': 2};
+let bang2miss2 = {'bang': 3, 'missed': 3};
 let bang1miss1 = {'bang': 1, 'missed': 1};
 
 let player = new Player(4, "Scheriff", 2, 1, 4, bang2miss2);
@@ -125,19 +136,35 @@ function getImage(src) {
 `
 }
 
+
 document.getElementById('playerHand').innerHTML = `
 ${frontsideOfPlayer.map(getImage).join('')}
 `;
+document.getElementById('HP').innerHTML = `
+${getImage(player.hpImage)}
+`;
+
 
 document.getElementById('enemy1Hand').innerHTML = `
 ${backsideOfEnemy1.map(getImage).join('')}
 `;
+document.getElementById('enemy1HP').innerHTML = `
+${getImage(enemy1.hpImage)}
+`;
+
+
 
 document.getElementById('enemy2Hand').innerHTML = `
 ${backsideOfEnemy2.map(getImage).join('')}
 `;
+document.getElementById('enemy2HP').innerHTML = `
+${getImage(enemy2.hpImage)}
+`;
+
 
 document.getElementById('enemy3Hand').innerHTML = `
 ${backsideOfEnemy3.map(getImage).join('')}
 `;
-
+document.getElementById('enemy3HP').innerHTML = `
+${getImage(enemy3.hpImage)}
+`;
