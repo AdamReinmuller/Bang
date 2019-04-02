@@ -1,25 +1,189 @@
 {% extends 'layout.html' %}
 
 {% block content %}
+    <div id="table">
+        <table>
+            <tr>
+                <td>
+                    <div id="graveyard">
+                        <img src="/static/images/graveyardback.png" alt="" height=300 width=200>
+                    </div>
+                </td>
+                <td>
+                    <div id="deck">
+                        <img src="/static/images/cardback.png" alt="" height=300 width=200>
 
-<p class="h1 text-center">Memory Game</p>
-<p class="text-center">How many different cards would you like to play with</p>
+                    </div>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-danger">Action</button>
+                </td>
 
-<div class="text-center">
-<div class="btn-group">
-  <button type="button" class="btn btn-outline-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Choose
-  </button>
-  <div class="dropdown-menu">
-        {% for i in range(1, 21) %}
-    <a class="dropdown-item" href="/game?card-number={{ i }}">{{ i }}</a>
-        {% endfor %}
-  </div>
-</div>
-</div>
+                <td>
+                    <button type="button" class="btn btn-warning">End turn</button>
+                </td>
+            </tr>
 
+        </table>
 
+    </div>
 
+    <div id="player">
+        <table class="table table-bordered table-dark">
+            <tr>
+                <td>
+                    <div id="role">
+                        <img src="/static/images/bandit.png" alt="" height=120 width=300>
+                    </div>
+                </td>
 
+                <td>
+                    <div id="HP">
+                        <img src="/static/images/3hp.png" alt="" height=120 width=300>
+
+                    </div>
+                </td>
+                <td>
+                    <div class="blues">
+                        <img src="/static/images/remington.png" alt="" height=120 width=100>
+                        <img src="/static/images/remington.png" alt="" height=120 width=100>
+                        <img src="/static/images/remington.png" alt="" height=120 width=100>
+                        <img src="/static/images/remington.png" alt="" height=120 width=100>
+
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <div id="playerHand">
+                        <img src="/static/images/miss.png" alt="" height=150 width=100>
+                        <img src="/static/images/miss.png" alt="" height=150 width=100>
+                        <img src="/static/images/miss.png" alt="" height=150 width=100>
+                        <img src="/static/images/miss.png" alt="" height=150 width=100>
+
+                    </div>
+                </td>
+            </tr>
+
+        </table>
+    </div>
+
+    <div id="enemy1hand">
+        <table class="table-borderless">
+            <tr>
+                <td>
+                    <div id="role">
+                        <img src="/static/images/bandit.png" alt="" height=100 width=100>
+                    </div>
+                </td>
+
+                <td>
+                    <div id="HP">
+                        <img src="/static/images/3hp.png" alt="" height=100 width=100>
+
+                    </div>
+                </td>
+                <td>
+                    <div>
+                        <img src="/static/images/remington.png" alt="" height=100 width=100>
+                        <img src="/static/images/remington.png" alt="" height=100 width=100>
+                        <img src="/static/images/remington.png" alt="" height=100 width=100>
+
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <div>
+                        <img src="/static/images/cardback.png" alt="" height=100 width=100>
+                        <img src="/static/images/cardback.png" alt="" height=100 width=100>
+                        <img src="/static/images/cardback.png" alt="" height=100 width=100>
+                        <img src="/static/images/cardback.png" alt="" height=100 width=100>
+                        <img src="/static/images/cardback.png" alt="" height=100 width=100>
+
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id="enemy3hand">
+        <table class="table-borderless">
+            <tr>
+                <td>
+                    <div id="role">
+                        <img src="/static/images/bandit.png" alt="" height=100 width=100>
+                    </div>
+                </td>
+
+                <td>
+                    <div id="HP">
+                        <img src="/static/images/3hp.png" alt="" height=100 width=100>
+
+                    </div>
+                </td>
+                <td>
+                    <div>
+                        <img src="/static/images/remington.png" alt="" height=100 width=100>
+                        <img src="/static/images/remington.png" alt="" height=100 width=100>
+                        <img src="/static/images/remington.png" alt="" height=100 width=100>
+
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <div>
+                        <img src="/static/images/cardback.png" alt="" height=100 width=100>
+                        <img src="/static/images/cardback.png" alt="" height=100 width=100>
+                        <img src="/static/images/cardback.png" alt="" height=100 width=100>
+                        <img src="/static/images/cardback.png" alt="" height=100 width=100>
+                        <img src="/static/images/cardback.png" alt="" height=100 width=100>
+                        <img src="/static/images/cardback.png" alt="" height=100 width=100>
+
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id="enemy2hand">
+        <table class="table-borderless">
+            <tr>
+                <td>
+                    <div id="role">
+                        <img src="/static/images/bandit.png" alt="" height=100 width=100>
+                    </div>
+                </td>
+
+                <td>
+                    <div id="HP">
+                        <img src="/static/images/3hp.png" alt="" height=100 width=100>
+
+                    </div>
+                </td>
+                <td>
+                    <div>
+                        <img src="/static/images/remington.png" alt="" height=100 width=100>
+                        <img src="/static/images/remington.png" alt="" height=100 width=100>
+                        <img src="/static/images/remington.png" alt="" height=100 width=100>
+                        <img src="/static/images/remington.png" alt="" height=100 width=100>
+                        <img src="/static/images/remington.png" alt="" height=100 width=100>
+
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <div>
+                        <img src="/static/images/cardback.png" alt="" height=100 width=100>
+                        <img src="/static/images/cardback.png" alt="" height=100 width=100>
+                        <img src="/static/images/cardback.png" alt="" height=100 width=100>
+                        <img src="/static/images/cardback.png" alt="" height=100 width=100>
+                        <img src="/static/images/cardback.png" alt="" height=100 width=100>
+
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
 
 {% endblock %}

@@ -16,7 +16,6 @@ let fullDeck = {
 // }
 
 
-
 function shuffleCards(array) {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -35,6 +34,7 @@ class Player { //cards: dictionary
         this.hand = cards;
         this.features = features;
     }
+
     bang(target) {
         if (this.hand.bang > 0 && target.hand.missed === 0) {
             target.hp -= 1;
@@ -63,6 +63,7 @@ class Cards {
     constructor(object) {
         this.items = object;
         this.cardsArray = this.dictToArray();
+        this.frontSide = this.getFrontside(); //gives back an array of the links
     }
 
     dictToArray() {
@@ -78,12 +79,16 @@ class Cards {
     }
 
     getFrontside() {
-        for (item of this.cardsArray) {
+        let frontSideArray = [];
+        for (let item of this.cardsArray) {
             if (item === 'bang') {
-                return 'static/cards/bang.jpg'
+                frontSideArray.push('static/images/bang.png');
+            } else if (item === 'missed') {
+                frontSideArray.push('static/images/miss.png');
             }
             else if(item === 'missed')
         }
+        return frontSideArray
     }
 
 
@@ -91,7 +96,7 @@ class Cards {
 
 
 let bang2miss2 = {'bang': 2, 'missed': 2};
-let raj =  new Player(4, "Scheriff", 2, 1, 4, bang2miss2);
+let raj = new Player(4, "Scheriff", 2, 1, 4, bang2miss2);
 let dombi = new Player(4, "Scheriff", 2, [], 4, bang2miss2);
 
 // alert('dombi hp: ' + dombi.hp );
@@ -102,6 +107,6 @@ let dombi = new Player(4, "Scheriff", 2, [], 4, bang2miss2);
 // alert('dombi hp: ' + dombi.hp );
 // alert('raj bangs: ' + raj.hand['bang']);
 let asdasd = new Cards(bang2miss2);
-for (item of asdasd.cardsArray) {
-    console.log(item)
+for (frontside of asdasd.frontSide) {
+    alert(frontside)
 }
