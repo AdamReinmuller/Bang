@@ -64,6 +64,7 @@ class Cards {
         this.cardsObject = object;
         this.cardsArray = this.dictToArray();
         this.frontSide = this.getFrontside(); //gives back an array of the links
+        this.backSide = this.getBackSide();
     }
 
     dictToArray() {
@@ -90,34 +91,53 @@ class Cards {
         return frontSideArray
     }
 
+    getBackSide() {
+        let backSideArray = [];
+        for (let i = 0; i < this.cardsArray.length; i++) {
+            backSideArray.push('static/images/cardback.png')
+        }
+        return backSideArray
+    }
+
 
 }
 
 
 let bang2miss2 = {'bang': 2, 'missed': 2};
-let raj = new Player(4, "Scheriff", 2, 1, 4, bang2miss2);
-let dombi = new Player(4, "Scheriff", 2, [], 4, bang2miss2);
+let bang1miss1 = {'bang': 1, 'missed': 1};
 
-// alert('dombi hp: ' + dombi.hp );
-// alert('raj bangs: ' + raj.hand.cardsObject['bang']);
-//
-// raj.bang(dombi);
-//
-// alert('dombi hp: ' + dombi.hp );
-// alert('raj bangs: ' + raj.hand.cardsObject['bang']);
+let player = new Player(4, "Scheriff", 2, 1, 4, bang2miss2);
+let enemy1 = new Player(3, "Scheriff", 2, [], 4, bang2miss2);
+let enemy2 = new Player(2, "Scheriff", 2, [], 4, bang1miss1);
+let enemy3 = new Player(1, "Scheriff", 2, [], 4, bang1miss1);
 
 
-let frontsideofRaj = raj.hand.frontSide;
+
+let frontsideOfPlayer = player.hand.frontSide;
+let backsideOfEnemy1 = enemy1.hand.backSide;
+let backsideOfEnemy2 = enemy2.hand.backSide;
+let backsideOfEnemy3 = enemy3.hand.backSide;
 
 
-function cardTemplate(front) {
+function getImage(src) {
     return `
-<img src="/${front}" alt="">
+<img src="/${src}" alt="">
 `
 }
 
 document.getElementById('playerHand').innerHTML = `
-${frontsideofRaj.map(cardTemplate).join('')}
+${frontsideOfPlayer.map(getImage).join('')}
 `;
 
-// <img src="/static/images/miss.png" alt="" height=150 width=100>
+document.getElementById('enemy1Hand').innerHTML = `
+${backsideOfEnemy1.map(getImage).join('')}
+`;
+
+document.getElementById('enemy2Hand').innerHTML = `
+${backsideOfEnemy2.map(getImage).join('')}
+`;
+
+document.getElementById('enemy3Hand').innerHTML = `
+${backsideOfEnemy3.map(getImage).join('')}
+`;
+
