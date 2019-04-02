@@ -6,6 +6,11 @@ let fullDeck = {
 
 
 function Player(hp, role, position, range, features, cards) { //cards: dictionary
+    /*
+    *
+    *
+    *
+    * */
     this.hp = hp;
     this.role = role;
     this.range = range;
@@ -14,7 +19,7 @@ function Player(hp, role, position, range, features, cards) { //cards: dictionar
     this.features = features;
 
     this.bang = function(target) {
-        if (this.hand.bang > 0) {
+        if (this.hand.bang > 0 && ) {
             target.hp -= 1;
             this.removeCard('bang');
         }
