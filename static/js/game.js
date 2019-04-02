@@ -60,8 +60,8 @@ class Player { //cards: dictionary
 
 
 class Cards {
-    constructor(array) {
-        this.items = array;
+    constructor(object) {
+        this.items = object;
         this.cardsArray = this.dictToArray();
     }
 
@@ -75,6 +75,14 @@ class Cards {
             }
         }
         return fArray
+    }
+
+    getFrontside() {
+        for (item of this.cardsArray) {
+            if (item === 'bang') {
+                return 'static/cards/bang.jpg'
+            }
+        }
     }
 
 
