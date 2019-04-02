@@ -1,4 +1,5 @@
 let turnCounter = 0;
+let maxTurn = 5;
 let players = [];
 
 let fullDeck = {
@@ -91,14 +92,25 @@ function setup() {
     let bang2miss2 = {'bang': 2, 'missed': 2};
     let raj =  new Player(4, "Scheriff", 2, 1, 4, bang2miss2);
     let dombi = new Player(4, "Scheriff", 2, [], 4, bang2miss2);
-    debugger;
+    players.push(raj,dombi);
+    console.log(players);
 
 
 }
 
-function draw() {
-    console.log(players);
+function main() {
+    console.log("This is the " + turnCounter + "turn");
+    for(let playerStepCount = 0; playerStepCount < players.length; playerStepCount++){
+        console.log("This is " + players[playerStepCount] + "'s turn!");
+
+
+    }
+
     turnCounter++;
 
 }
 
+setup();
+while(turnCounter <  maxTurn){
+    main();
+}
