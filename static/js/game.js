@@ -6,25 +6,25 @@ let fullDeck = {
 
 
 class Player { //cards: dictionary
-    constructor(hp, role, position, range, features, cards)
-    this.hp = hp;
-    this.role = role;
-    this.range = range;
-    this.position = position;
-    this.hand = cards;
-    this.features = features;
-
-    this.bang = function(target) {
+    constructor(hp, role, position, range, features, cards) {
+        this.hp = hp;
+        this.role = role;
+        this.range = range;
+        this.position = position;
+        this.hand = cards;
+        this.features = features;
+    }
+    bang(target) {
         if (this.hand.bang > 0) {
             target.hp -= 1;
             this.removeCard('bang');
         }
     };
-    this.removeCard = function(card) {
+    removeCard(card) {
         this.hand[card] -= 1;
     };
 
-    this.draw2FromDeck = function() {
+    draw2FromDeck() {
 
     }
 }
