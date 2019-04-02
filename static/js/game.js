@@ -98,14 +98,26 @@ let bang2miss2 = {'bang': 2, 'missed': 2};
 let raj = new Player(4, "Scheriff", 2, 1, 4, bang2miss2);
 let dombi = new Player(4, "Scheriff", 2, [], 4, bang2miss2);
 
-alert('dombi hp: ' + dombi.hp );
-alert('raj bangs: ' + raj.hand.cardsObject['bang']);
+// alert('dombi hp: ' + dombi.hp );
+// alert('raj bangs: ' + raj.hand.cardsObject['bang']);
+//
+// raj.bang(dombi);
+//
+// alert('dombi hp: ' + dombi.hp );
+// alert('raj bangs: ' + raj.hand.cardsObject['bang']);
 
-raj.bang(dombi);
 
-alert('dombi hp: ' + dombi.hp );
-alert('raj bangs: ' + raj.hand.cardsObject['bang']);
-// let asdasd = new Cards(bang2miss2);
-// for (frontside of asdasd.frontSide) {
-//     alert(frontside)
-// }
+let frontsideofRaj = raj.hand.frontSide;
+
+
+function cardTemplate(front) {
+    return `
+<img src="/${front}" alt="">
+`
+}
+
+document.getElementById('playerHand').innerHTML = `
+${frontsideofRaj.map(cardTemplate).join('')}
+`;
+
+// <img src="/static/images/miss.png" alt="" height=150 width=100>
