@@ -8,7 +8,7 @@ def hello_world():
     return render_template("index.html")
 
 @app.route('/game')
-def hello_world():
+def asd():
     return render_template('game.html')
 
 
