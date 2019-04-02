@@ -82,6 +82,7 @@ class Cards {
             if (item === 'bang') {
                 return 'static/cards/bang.jpg'
             }
+            else if(item === 'missed')
         }
     }
 
