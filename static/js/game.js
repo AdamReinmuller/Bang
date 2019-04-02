@@ -3,17 +3,17 @@ let fullDeck = {
     'missed': 8
 };
 
-function dictToArray(dict) {
-    fArray = [];
-    let keys = Object.keys(dict);
-    let values = Object.values(dict);
-    for (let i = 0; i < keys.length; i++) {
-        for (let num = 0; num < values[i]; num++) {
-            fArray.push(keys[i])
-        }
-    }
-    return fArray
-}
+// function dictToArray(dict) {
+//     fArray = [];
+//     let keys = Object.keys(dict);
+//     let values = Object.values(dict);
+//     for (let i = 0; i < keys.length; i++) {
+//         for (let num = 0; num < values[i]; num++) {
+//             fArray.push(keys[i])
+//         }
+//     }
+//     return fArray
+// }
 
 
 
@@ -61,21 +61,23 @@ class Player { //cards: dictionary
 
 class Cards {
     constructor(array) {
-        this.bang = array['bang'];
-            bang.number = bang.length;
-            bang.frontside = 'static/cards/bang.jpg';
-            bang.backside = '123';
-            bang.visible = visible;
-
-        this.missed = array['missed'];
-            missed.number = missed.length;
-            missed.frontside = 'static/cards/missed.jpg';
-            missed.backside = '123';
-            missed.visible = visible;
+        this.items = array;
+        this.cardsArray = this.dictToArray();
     }
-    getCardTypeNumber(type) { //return the number of cards of 'type'
 
+    dictToArray() {
+        let fArray = [];
+        let keys = Object.keys(this.items);
+        let values = Object.values(this.items);
+        for (let i = 0; i < keys.length; i++) {
+            for (let num = 0; num < values[i]; num++) {
+                fArray.push(keys[i])
+            }
+        }
+        return fArray
     }
+
+
 }
 
 
@@ -90,4 +92,7 @@ let dombi = new Player(4, "Scheriff", 2, [], 4, bang2miss2);
 //
 // alert('dombi hp: ' + dombi.hp );
 // alert('raj bangs: ' + raj.hand['bang']);
-let asdasd = dictToArray(fullDeck);
+let asdasd = new Cards(bang2miss2);
+for (item of asdasd.cardsArray) {
+    console.log(item)
+}
