@@ -6,6 +6,7 @@ body {
     color: black;
 }
 
+
 #bootstrap-overrides table {
     border: transparent;
 
@@ -27,11 +28,101 @@ body {
 
 }
 
-img {
+#graveyard img {
+    height: 300px;
+    width: 200px;
     vertical-align: middle;
 }
 
-#enemy1hand {
+#deck img {
+    height: 300px;
+    width: 200px;
+    vertical-align: middle;
+}
+
+#player #blues img {
+    height: 120px;
+    width: 100px;
+}
+
+#player #role img {
+    height: 120px;
+    width: 300px;
+}
+
+#player #HP img {
+    height: 120px;
+    width: 300px;
+}
+
+#player #playerHand img {
+    height: 150px;
+    width: 100px;
+}
+
+#enemy1Role img {
+    height:100px;
+    width: 100px;
+}
+
+#enemy1HP img {
+    height:100px;
+    width: 150px;
+}
+
+#enemy1Blues img {
+    height:100px;
+    width: 100px;
+}
+
+#enemy1Hand img {
+    height:100px;
+    width: 100px;
+}
+
+#enemy2Role img {
+    height:100px;
+    width: 100px;
+}
+
+#enemy2HP img {
+    height:100px;
+    width: 150px;
+}
+
+#enemy2Blues img {
+    height:100px;
+    width: 100px;
+}
+
+#enemy2Hand img {
+    height:100px;
+    width: 100px;
+}
+
+#enemy3Role img {
+    height:100px;
+    width: 100px;
+}
+
+#enemy3HP img {
+    height:100px;
+    width: 150px;
+}
+
+#enemy3Blues img {
+    height:100px;
+    width: 100px;
+}
+
+#enemy3Hand img {
+    height:100px;
+    width: 100px;
+}
+
+
+
+#enemy1 {
     -webkit-transform: rotate(90deg);
     -moz-transform: rotate(90deg);
     -o-transform: rotate(90deg);
@@ -39,11 +130,11 @@ img {
     transform: rotate(90deg);
     float: left;
     text-align: center;
-    margin-top: 10%;
-    margin-left: -10%;
+    margin-top: 20%;
+    margin-left: -8%;
 }
 
-#enemy2hand {
+#enemy2 {
     -webkit-transform: rotate(180deg);
     -moz-transform: rotate(180deg);
     -o-transform: rotate(180deg);
@@ -52,11 +143,11 @@ img {
     float: top;
     text-align: center;
     margin-top: -5%;
-    margin-right: 15%;
+    margin-right: 10%;
     border: 0;
 }
 
-#enemy3hand {
+#enemy3 {
     border: 0 solid transparent;
     border-collapse: collapse;
     -webkit-transform: rotate(-90deg);
@@ -66,6 +157,6 @@ img {
     transform: rotate(-90deg);
     float: right;
     text-align: center;
-    margin-top: 10%;
+    margin-top: 20%;
     margin-right: -10%;
 }
