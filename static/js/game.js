@@ -273,12 +273,5 @@ players.push(enemy3);
 
 
 updateDOM();
-player.bang(enemy1);
-updateDOM();
-player.bang(enemy1);
-updateDOM();
 
-let eachCard = document.getElementsById("playerHand").children();
-for (each in eachCard){
-    alert(each)
-}
+

@@ -36,6 +36,9 @@ img {
     height: 30px;
 }
 
+#endTurnButton {
+    background-color: red;
+}
 
 #player {
     position: absolute;
@@ -131,7 +134,7 @@ img {
 
 #enemy2Role img {
     height: 90px;
-    width: 100px;
+    width: 120px;
 }
 
 #enemy2HP img {
