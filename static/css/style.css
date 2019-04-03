@@ -10,21 +10,28 @@ img {
 
 }
 
-.navbar {
-    height: 20px;
-
-}
-
 #bootstrap-overrides table {
     border: transparent;
 
 }
 
-#player {
+.navbar {
+    height: 30px;
+}
 
+.form-control {
+    height: 30px;
+}
+
+.nav-item {
+    height: 30px;
+}
+
+
+#player {
     position: absolute;
-    bottom: 0;
-    left: 30%;
+    bottom: -12px;
+    left: 28%;
     text-align: center;
 }
 
@@ -83,7 +90,7 @@ img {
 
 #player #playerHand img {
     height: 120px;
-    width: 90px;
+    width: 100px;
 }
 
 #enemy1Role img {
@@ -156,7 +163,7 @@ img {
     float: left;
     text-align: center;
     margin-top: 20%;
-    margin-left: -10%;
+    margin-left: -8%;
 }
 
 #enemy2 {
@@ -168,7 +175,7 @@ img {
     float: top;
     text-align: center;
     margin-top: 0%;
-    margin-right: 30%;
+    margin-right: 28%;
     border: 0;
 }
 
@@ -191,5 +198,5 @@ img {
     float: right;
     text-align: center;
     margin-top: 20%;
-    margin-right: -8%;
+    margin-right: -110px;
 }
