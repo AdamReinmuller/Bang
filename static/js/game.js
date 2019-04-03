@@ -1,19 +1,14 @@
+let gameLoop = 1;
+let safetyCounter = 0;
+let enemyIDs = ['enemy1','enemy2','enemy3'];
+
+let players = {};
+
 let fullDeck = {
     'bang': 8,
     'missed': 8
 };
 
-// function dictToArray(dict) {
-//     fArray = [];
-//     let keys = Object.keys(dict);
-//     let values = Object.values(dict);
-//     for (let i = 0; i < keys.length; i++) {
-//         for (let num = 0; num < values[i]; num++) {
-//             fArray.push(keys[i])
-//         }
-//     }
-//     return fArray
-// }
 
 
 function shuffleCards(array) {
@@ -237,6 +232,7 @@ function updatePlayerStats(){
     document.getElementById('enemy3Name').innerText = `
     ${enemy3.name}
     `;
+    document.getElementById("action").addEventListener("click",bang);
 }
 
 
@@ -247,16 +243,29 @@ function rotatePlayers(){
     enemy3 = enemy2;
     enemy2 = enemy1;
     enemy1 = temp;
+    updateNames();
+
 }
 
+function updateNames(){
+    players["player"] = player;
+    players["enemy1"] = enemy1;
+    players["enemy2"] = enemy2;
+    players["enemy3"] = enemy3;
+
+}
 
 let bang2miss2 = {'bang': 3, 'missed': 3};
 let bang1miss1 = {'bang': 1, 'missed': 1};
 
 let player = new Player('Raj',4, "Renegade", 0, 1, 4, bang2miss2);
+players['player'] = player;
 let enemy1 = new Player('Kristóf',3, "Bandit", 1, 1, 4, bang2miss2);
+players['enemy1'] = enemy1;
 let enemy2 = new Player('Simó',3, "Sheriff", 2, 1, 4, bang1miss1);
+players['enemy2'] = enemy2;
 let enemy3 = new Player('Dombi',1, "Deputy", 3, 1, 4, bang1miss1);
+players['enemy3'] = enemy3;
 
 
 updatePlayerStats();
@@ -264,3 +273,43 @@ updatePlayerStats();
 // rotatePlayers();
 
 updatePlayerStats();
+
+
+
+function setImgSrc(id, card_img_src) {
+    document.getElementById(id).src = card_img_src;
+}
+
+function bang() {
+    console.log("Hi, you pressed bang!");
+    //addingListenersToEnemies();
+    rotatePlayers();
+    updatePlayerStats();
+    addingListenersToEnemies();
+
+
+
+}
+
+function addingListenersToEnemies() {
+    for(let i = 0; i < 3; i++){
+        document.getElementById(enemyIDs[i]).addEventListener("click", function(){ enemyShooter(enemyIDs[i])}); //
+    }
+}
+
+function enemyShooter(me) {
+    console.log("yo. you pressed me: " + players[me].name);
+
+
+}
+
+function onEnemyClick() {
+    safetyCounter = 0;
+    while (player != target && safetyCounter < 8){
+        rotatePlayers();
+        safetyCounter++;
+    }
+
+
+}
+
