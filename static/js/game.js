@@ -254,10 +254,6 @@ function rotatePlayers(){
     enemy3.distance = 1;
 }
 
-let fullDeck = {
-    'bang': 8,
-    'missed': 8
-};
 
 let bang2miss2 = {'bang': 3, 'missed': 3};
 let bang1miss1 = {'bang': 1, 'missed': 1};
@@ -300,7 +296,7 @@ function eventListenerVariablesForCardZoom() {
                 let cardGoBackToHand = document.createElement('img');
                 cardGoBackToHand.setAttribute('src', srcCardGoBackToHand);
                 playerCards.appendChild(cardGoBackToHand);
-                zoomCardToReplace.setAttribute('src', ' ')
+                zoomCardToReplace.setAttribute('src', ' ');
                 targetZoom.dataset.enableHoover = 'true';
 
             }
@@ -324,8 +320,6 @@ function eventListenerVariablesForCardZoom() {
             if (targetZoom.dataset.enableHoover === 'true') {
                 if (e.target.tagName === 'IMG') {
                     console.log('hoover out event');
-                    let handCard = e.target;
-                    let handCardSrc = handCard.getAttribute('src');
                     zoomCardToReplace.setAttribute("src", ' ');
                 }
             }
@@ -334,10 +328,6 @@ function eventListenerVariablesForCardZoom() {
 
 }
 
-eventListenerVariablesForCardZoom()
+updateDOM();
 
-updateDOM();
-player.bang(enemy1);
-updateDOM();
-player.bang(enemy1);
-updateDOM();
+eventListenerVariablesForCardZoom();
