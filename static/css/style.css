@@ -17,7 +17,9 @@ img {
 }
 
 #player {
+
     position: absolute;
+    bottom: 0;
     left: 30%;
     text-align: center;
 }
@@ -43,7 +45,7 @@ img {
     position: relative;
     left: 1200px;
     top: -400px;
-    border-radius: 12px;
+    border-radius: 20px;
 
 }
 
@@ -61,23 +63,23 @@ img {
 }
 
 #player #blues img {
-    height: 100px;
+    height: 80px;
     width: 60px;
 }
 
 #player #role img {
-    height: 100px;
-    width: 200px;
+    height: 80px;
+    width: 160px;
 }
 
 #player #HP img {
-    height: 100px;
-    width: 200px;
+    height: 80px;
+    width: 160px;
 }
 
 #player #playerHand img {
-    height: 150px;
-    width: 100px;
+    height: 120px;
+    width: 90px;
 }
 
 #enemy1Role img {
@@ -162,7 +164,7 @@ img {
     float: top;
     text-align: center;
     margin-top: -5%;
-    margin-right: 20%;
+    margin-right: 30%;
     border: 0;
 }
 
