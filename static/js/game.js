@@ -26,17 +26,30 @@ function shuffleCards(array) {
 
 
 class Player { //cards: dictionary
-    constructor(name, hp, role, position, range, features, cards) {
+    constructor(name, hp, role, distance, range, features, cards) {
         this.name = name;
-        this.hp = hp;
-        this.hpImage = this.getHpImage();
         this.role = role;
+        this.hp = this.sheriffHp() + hp;
         this.roleImage = this.getRoleImage();
         this.roleImageBackSide = 'static/images/rolebackside.png';
         this.range = range;
-        this.position = position;
-        this.hand = new Cards(cards);
         this.features = features;
+        this.distance = this.getMustang() + distance;
+        this.hand = new Cards(cards);
+    }
+
+    getMustang() {
+        if (this.features.includes('Mustang')) {
+            return 1
+        }
+        else {return 0}
+    }
+
+    sheriffHp() {
+        if (this.role === 'Sheriff') {
+            return 1
+        }
+        else {return 0}
     }
 
     getHpImage() {
@@ -56,9 +69,13 @@ class Player { //cards: dictionary
     }
 
     bang(target) {
-        if (this.hand.cardsObject.bang > 0) {
+        if (this.hand.cards.bang > 0 && this.range >= target.distance) {
             target.hp -= 1;
             this.removeCard('bang');
+            // alert(this.name + ' banged ' + target.name + ' successfully')
+        }
+        else {
+            alert('Out of range')
         }
     };
 
@@ -70,7 +87,7 @@ class Player { //cards: dictionary
     }
 
     removeCard(card) {
-        this.hand.cardsObject[card] -= 1;
+        this.hand.cards[card] -= 1;
     };
 
     draw2FromDeck() {
@@ -81,16 +98,13 @@ class Player { //cards: dictionary
 
 class Cards {
     constructor(object) {
-        this.cardsObject = object;
-        this.cardsArray = this.dictToArray();
-        this.frontSide = this.getFrontside(); //gives back an array of the links
-        this.backSide = this.getBackSide();
+        this.cards = object;
     }
 
-    dictToArray() {
+    getCardsArray() {
         let fArray = [];
-        let keys = Object.keys(this.cardsObject);
-        let values = Object.values(this.cardsObject);
+        let keys = Object.keys(this.cards);
+        let values = Object.values(this.cards);
         for (let i = 0; i < keys.length; i++) {
             for (let num = 0; num < values[i]; num++) {
                 fArray.push(keys[i])
@@ -101,7 +115,7 @@ class Cards {
 
     getFrontside() {
         let frontSideArray = [];
-        for (let item of this.cardsArray) {
+        for (let item of this.getCardsArray()) {
             if (item === 'bang') {
                 frontSideArray.push('static/images/bang.png');
             } else if (item === 'missed') {
@@ -113,7 +127,7 @@ class Cards {
 
     getBackSide() {
         let backSideArray = [];
-        for (let i = 0; i < this.cardsArray.length; i++) {
+        for (let i = 0; i < this.getCardsArray().length; i++) {
             backSideArray.push('static/images/cardback.png')
         }
         return backSideArray
@@ -123,7 +137,7 @@ class Cards {
 }
 
 
-function updatePlayerStats() {
+function updateDOM(){
 
     function getImage(src) {
         return `
@@ -135,11 +149,11 @@ function updatePlayerStats() {
     //currentPlayer
     //cardsImage
     document.getElementById('playerHand').innerHTML = `
-    ${player.hand.frontSide.map(getImage).join('')}
+    ${player.hand.getFrontside().map(getImage).join('')}
     `;
     //HPImage
     document.getElementById('HP').innerHTML = `
-    ${getImage(player.hpImage)}
+    ${getImage(player.getHpImage())}
     `;
     //roleImage
     document.getElementById('role').innerHTML = `
@@ -154,11 +168,11 @@ function updatePlayerStats() {
     //enemy1
     //cardsImage
     document.getElementById('enemy1Hand').innerHTML = `
-    ${enemy1.hand.backSide.map(getImage).join('')}
+    ${enemy1.hand.getBackSide().map(getImage).join('')}
     `;
     //HPImage
     document.getElementById('enemy1HP').innerHTML = `
-    ${getImage(enemy1.hpImage)}
+    ${getImage(enemy1.getHpImage())}
     `;
     //roleImage
     if (enemy1.role === 'Sheriff') {
@@ -179,11 +193,11 @@ function updatePlayerStats() {
     //enemy2
     //cardsImage
     document.getElementById('enemy2Hand').innerHTML = `
-    ${enemy2.hand.backSide.map(getImage).join('')}
+    ${enemy2.hand.getBackSide().map(getImage).join('')}
     `;
     //HPImage
     document.getElementById('enemy2HP').innerHTML = `
-    ${getImage(enemy2.hpImage)}
+    ${getImage(enemy2.getHpImage())}
     `;
     //roleImage
     if (enemy2.role === 'Sheriff') {
@@ -204,11 +218,11 @@ function updatePlayerStats() {
     //enemy3
     //cardsImage
     document.getElementById('enemy3Hand').innerHTML = `
-    ${enemy3.hand.backSide.map(getImage).join('')}
+    ${enemy3.hand.getBackSide().map(getImage).join('')}
     `;
     //HPImage
     document.getElementById('enemy3HP').innerHTML = `
-    ${getImage(enemy3.hpImage)}
+    ${getImage(enemy3.getHpImage())}
     `;
     //roleImage
     if (enemy3.role === 'Sheriff') {
@@ -227,25 +241,36 @@ function updatePlayerStats() {
 }
 
 
-function rotatePlayers() {
-//switches the players in clockwise fashion
+function rotatePlayers(){
+//switches the players in clockwise fashion and updates their distance
     let temp = player;
     player = enemy3;
+    player.distance = 0;
     enemy3 = enemy2;
+    enemy3.distance = 1;
     enemy2 = enemy1;
+    enemy2.distance = 2;
     enemy1 = temp;
+    enemy3.distance = 1;
 }
 
+let fullDeck = {
+    'bang': 8,
+    'missed': 8
+};
 
 let bang2miss2 = {'bang': 3, 'missed': 3};
 let bang1miss1 = {'bang': 1, 'missed': 1};
 
-let player = new Player('Raj', 4, "Renegade", 2, 1, 4, bang2miss2);
-let enemy1 = new Player('Kristóf', 3, "Bandit", 2, [], 4, bang2miss2);
-let enemy2 = new Player('Simó', 2, "Sheriff", 2, [], 4, bang1miss1);
-let enemy3 = new Player('Dombi', 1, "Deputy", 2, [], 4, bang1miss1);
-
-let players = [player, enemy1, enemy2, enemy3];
+let players = [];
+let player = new Player('Raj',4, "Renegade", 0, 1, [], bang2miss2);
+players.push(player);
+let enemy1 = new Player('Kristóf',3, "Bandit", 1, 1, [], bang2miss2);
+players.push(enemy1);
+let enemy2 = new Player('Simó',2, "Sheriff", 2, 1, [], bang1miss1);
+players.push(enemy2);
+let enemy3 = new Player('Dombi',1, "Deputy", 1, 1, [], bang1miss1);
+players.push(enemy3);
 
 function eventListenerVariablesForCardZoom() {
 
@@ -311,8 +336,8 @@ function eventListenerVariablesForCardZoom() {
 
 eventListenerVariablesForCardZoom()
 
-updatePlayerStats();
-
-rotatePlayers();
-
-updatePlayerStats();
+updateDOM();
+player.bang(enemy1);
+updateDOM();
+player.bang(enemy1);
+updateDOM();
