@@ -26,7 +26,8 @@ function shuffleCards(array) {
 
 
 class Player { //cards: dictionary
-    constructor(hp, role, position, range, features, cards) {
+    constructor(name, hp, role, position, range, features, cards) {
+        this.name = name;
         this.hp = hp;
         this.hpImage = this.getHpImage();
         this.role = role;
@@ -128,10 +129,10 @@ class Cards {
 let bang2miss2 = {'bang': 3, 'missed': 3};
 let bang1miss1 = {'bang': 1, 'missed': 1};
 
-let player = new Player(2, "Deputy", 2, 1, 4, bang2miss2);
-let enemy1 = new Player(3, "Bandit", 2, [], 4, bang2miss2);
-let enemy2 = new Player(2, "Sheriff", 2, [], 4, bang1miss1);
-let enemy3 = new Player(4, "Deputy", 2, [], 4, bang1miss1);
+let player = new Player('Raj',4, "Renegade", 2, 1, 4, bang2miss2);
+let enemy1 = new Player('Kristóf',3, "Bandit", 2, [], 4, bang2miss2);
+let enemy2 = new Player('Simó',2, "Sheriff", 2, [], 4, bang1miss1);
+let enemy3 = new Player('Dombi',1, "Deputy", 2, [], 4, bang1miss1);
 
 
 function updatePlayerStats(){
