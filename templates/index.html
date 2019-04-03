@@ -27,13 +27,19 @@
                     <button type="button" class="btn btn-warning">End turn</button>
                 </td>
             </tr>
-
         </table>
+
 
     </div>
 
+
     <div id="player">
         <table class="table table-bordered table-dark">
+            <tr>
+                <td colspan="3">
+                    <div id="playerName">player's name</div>
+                </td>
+            </tr>
             <tr>
                 <td>
                     <div id="role">
@@ -64,6 +70,12 @@
                         <img src="/static/images/miss.png" alt="">
                         <img src="/static/images/miss.png" alt="">
                         <img src="/static/images/miss.png" alt="">
+                        <img src="/static/images/miss.png" alt="">
+                        <img src="/static/images/miss.png" alt="">
+                        <img src="/static/images/miss.png" alt="">
+                        <img src="/static/images/miss.png" alt="">
+                        <img src="/static/images/miss.png" alt="">
+                        <img src="/static/images/miss.png" alt="">
 
                     </div>
                 </td>
@@ -75,9 +87,14 @@
     <div id="enemy1">
         <table class="table-borderless">
             <tr>
+                <td colspan="3">
+                    <div id="enemy1Name">enemy1's name</div>
+                </td>
+            </tr>
+            <tr>
                 <td>
                     <div id="enemy1Role">
-                        <img src="/static/images/bandit.png" alt="" >
+                        <img src="/static/images/bandit.png" alt="">
                     </div>
                 </td>
 
@@ -92,7 +109,7 @@
                 </td>
                 <td>
                     <div id="enemy1HP">
-                        <img src="/static/images/3hp.png" alt="">
+                        <img src="/static/images/1hp.png" alt="">
 
                     </div>
                 </td>
@@ -112,6 +129,11 @@
     </div>
     <div id="enemy3">
         <table class="table-borderless">
+            <tr>
+                <td colspan="3">
+                    <div id="enemy3Name">enemy3's name</div>
+                </td>
+            </tr>
             <tr>
                 <td>
                     <div id="enemy3HP">
@@ -140,6 +162,7 @@
                         <img src="/static/images/cardback.png" alt="">
                         <img src="/static/images/cardback.png" alt="">
                         <img src="/static/images/cardback.png" alt="">
+                        <img src="/static/images/cardback.png" alt="">
                     </div>
                 </td>
             </tr>
@@ -148,15 +171,15 @@
     <div id="enemy2">
         <table class="table-borderless">
             <tr>
+                <td colspan="3">
+                    <div id="enemy2Name">enemy2's name</div>
+                </td>
+            </tr>
+            <tr>
                 <td>
                     <div id="enemy2HP">
                         <img src="/static/images/3hp.png" alt="">
 
-                    </div>
-                </td>
-                <td>
-                    <div id="enemy2Role">
-                        <img src="/static/images/bandit.png" alt="">
                     </div>
                 </td>
 
@@ -167,6 +190,11 @@
                         <img src="/static/images/remington.png" alt="">
                     </div>
                 </td>
+                <td>
+                    <div id="enemy2Role">
+                        <img src="/static/images/bandit.png" alt="">
+                    </div>
+                </td>
             </tr>
             <tr>
                 <td colspan="3">
@@ -175,11 +203,14 @@
                         <img src="/static/images/cardback.png" alt="">
                         <img src="/static/images/cardback.png" alt="">
                         <img src="/static/images/cardback.png" alt="">
-                        <img src="/static/images/cardback.png" alt="">
                     </div>
                 </td>
             </tr>
         </table>
+    </div>
+
+    <div id="cardZoom">
+        <img src="/static/images/cardback.png" alt="">
     </div>
 
 {% endblock %}
