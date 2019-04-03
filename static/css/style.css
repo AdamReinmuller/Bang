@@ -19,6 +19,7 @@ img {
 #player {
     position: absolute;
     left: 30%;
+    bottom: 0;
     text-align: center;
 }
 

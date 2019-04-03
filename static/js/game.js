@@ -148,6 +148,10 @@ function updatePlayerStats(){
     document.getElementById('role').innerHTML = `
     ${getImage(player.roleImage)}
     `;
+    //names
+    document.getElementById('playerName').innerText = `
+    ${player.name}
+    `;
 
 
     //enemy1
@@ -170,6 +174,10 @@ function updatePlayerStats(){
         ${getImage(enemy1.roleImageBackSide)}
         `
     }
+    //names
+    document.getElementById('enemy1Name').innerText = `
+    ${enemy1.name}
+    `;
 
 
     //enemy2
@@ -192,6 +200,10 @@ function updatePlayerStats(){
         ${getImage(enemy2.roleImageBackSide)}
         `
     }
+    //names
+    document.getElementById('enemy2Name').innerText = `
+    ${enemy2.name}
+    `;
 
 
     //enemy3
@@ -214,8 +226,21 @@ function updatePlayerStats(){
         ${getImage(enemy3.roleImageBackSide)}
         `
     }
-
+    //names
+    document.getElementById('enemy3Name').innerText = `
+    ${enemy3.name}
+    `;
 }
+
+
+function rotatePlayers(){
+    let temp = play1;
+    player = enemy3;
+    enemy3 = enemy2;
+    enemy2 = enemy1;
+    enemy1 = temp;
+}
+
 
 let bang2miss2 = {'bang': 3, 'missed': 3};
 let bang1miss1 = {'bang': 1, 'missed': 1};
@@ -225,7 +250,13 @@ let enemy1 = new Player('Kristóf',3, "Bandit", 2, [], 4, bang2miss2);
 let enemy2 = new Player('Simó',2, "Sheriff", 2, [], 4, bang1miss1);
 let enemy3 = new Player('Dombi',1, "Deputy", 2, [], 4, bang1miss1);
 
+let players = [player, enemy1, enemy2, enemy3];
+
+
 updatePlayerStats();
 
+
 //switches the players in clockwise fashion
-let temp = player
+
+
+updatePlayerStats();
