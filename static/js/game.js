@@ -46,14 +46,11 @@ class Player { //cards: dictionary
     getRoleImage() {
         if (this.role === 'Sheriff') {
             return `static/images/sheriff.png`
-        }
-        else if (this.role === 'Renegade') {
+        } else if (this.role === 'Renegade') {
             return 'static/images/renegade.png'
-        }
-        else if (this.role === 'Bandit') {
+        } else if (this.role === 'Bandit') {
             return 'static/images/bandit.png'
-        }
-        else {
+        } else {
             return 'static/images/deputy.png'
         }
     }
@@ -126,7 +123,7 @@ class Cards {
 }
 
 
-function updatePlayerStats(){
+function updatePlayerStats() {
 
     function getImage(src) {
         return `
@@ -168,8 +165,7 @@ function updatePlayerStats(){
         document.getElementById('enemy1Role').innerHTML = `
         ${getImage(enemy1.roleImage)}
         `
-    }
-    else {
+    } else {
         document.getElementById('enemy1Role').innerHTML = `
         ${getImage(enemy1.roleImageBackSide)}
         `
@@ -194,8 +190,7 @@ function updatePlayerStats(){
         document.getElementById('enemy2Role').innerHTML = `
         ${getImage(enemy2.roleImage)}
         `
-    }
-    else {
+    } else {
         document.getElementById('enemy2Role').innerHTML = `
         ${getImage(enemy2.roleImageBackSide)}
         `
@@ -220,8 +215,7 @@ function updatePlayerStats(){
         document.getElementById('enemy3Role').innerHTML = `
         ${getImage(enemy3.roleImage)}
         `
-    }
-    else {
+    } else {
         document.getElementById('enemy3Role').innerHTML = `
         ${getImage(enemy3.roleImageBackSide)}
         `
@@ -233,7 +227,7 @@ function updatePlayerStats(){
 }
 
 
-function rotatePlayers(){
+function rotatePlayers() {
 //switches the players in clockwise fashion
     let temp = player;
     player = enemy3;
@@ -246,48 +240,76 @@ function rotatePlayers(){
 let bang2miss2 = {'bang': 3, 'missed': 3};
 let bang1miss1 = {'bang': 1, 'missed': 1};
 
-let player = new Player('Raj',4, "Renegade", 2, 1, 4, bang2miss2);
-let enemy1 = new Player('Kristóf',3, "Bandit", 2, [], 4, bang2miss2);
-let enemy2 = new Player('Simó',2, "Sheriff", 2, [], 4, bang1miss1);
-let enemy3 = new Player('Dombi',1, "Deputy", 2, [], 4, bang1miss1);
+let player = new Player('Raj', 4, "Renegade", 2, 1, 4, bang2miss2);
+let enemy1 = new Player('Kristóf', 3, "Bandit", 2, [], 4, bang2miss2);
+let enemy2 = new Player('Simó', 2, "Sheriff", 2, [], 4, bang1miss1);
+let enemy3 = new Player('Dombi', 1, "Deputy", 2, [], 4, bang1miss1);
 
 let players = [player, enemy1, enemy2, enemy3];
 
+function eventListenerVariablesForCardZoom() {
+
+    let playerCards = document.getElementById('playerHand');
+    let zoomCardToReplace = document.querySelector('#cardZoom img');
+    let targetZoom = document.querySelector('#cardZoom');
+
+    playerCards.addEventListener('click', function (e) {
+        if (e.target.tagName === 'IMG') {
+            if (targetZoom.dataset.enableHoover === 'true') {
+                console.log('click event after if');
+                let handCard = e.target;
+                let handCardSrc = handCard.getAttribute('src');
+                zoomCardToReplace.setAttribute("src", handCardSrc);
+                handCard.remove();
+                targetZoom.dataset.enableHoover = 'false';
 
 
-let playerCards = document.getElementById('playerHand');
-let zoomCardToReplace = document.querySelector('#cardZoom img');
-let targetZoom = document.querySelector('#cardZoom');
-
-playerCards.addEventListener('click', function (e) {
-    if (e.target.tagName === 'IMG') {
-        if (zoomCardToReplace.getAttribute('src') === " ") {
-            let handCard = e.target;
-            let handCardSrc = handCard.getAttribute('src');
-            zoomCardToReplace.setAttribute("src", handCardSrc);
-            handCard.remove();
+            }
         }
-    }
-});
+    });
 
+    targetZoom.addEventListener('click', function (e) {
+        if (e.target.tagName === 'IMG') {
+            if (e.target.getAttribute('src') !== " ") {
+                let srcCardGoBackToHand = e.target.getAttribute('src');
+                let cardGoBackToHand = document.createElement('img');
+                cardGoBackToHand.setAttribute('src', srcCardGoBackToHand);
+                playerCards.appendChild(cardGoBackToHand);
+                zoomCardToReplace.setAttribute('src', ' ')
+                targetZoom.dataset.enableHoover = 'true';
 
-
-targetZoom.addEventListener('click', function (e) {
-    if (e.target.tagName === 'IMG'){
-        if (e.target.getAttribute('src') !== " "){
-            let srcCardGoBackToHand = e.target.getAttribute('src');
-            let cardGoBackToHand = document.createElement('img');
-            cardGoBackToHand.setAttribute('src', srcCardGoBackToHand);
-            playerCards.appendChild(cardGoBackToHand);
-            zoomCardToReplace.setAttribute('src', ' ' )
+            }
         }
-    }
+    });
 
-});
+    playerCards.addEventListener('mouseover', function (e) {
+            if (targetZoom.dataset.enableHoover === 'true') {
+                if (e.target.tagName === 'IMG') {
+                    console.log('hoover over event');
+                    let handCard = e.target;
+                    let handCardSrc = handCard.getAttribute('src');
+                    zoomCardToReplace.setAttribute("src", handCardSrc);
+                }
 
+            }
+        }
+    );
 
+    playerCards.addEventListener('mouseout', function (e) {
+            if (targetZoom.dataset.enableHoover === 'true') {
+                if (e.target.tagName === 'IMG') {
+                    console.log('hoover out event');
+                    let handCard = e.target;
+                    let handCardSrc = handCard.getAttribute('src');
+                    zoomCardToReplace.setAttribute("src", ' ');
+                }
+            }
+        }
+    );
 
+}
 
+eventListenerVariablesForCardZoom()
 
 updatePlayerStats();
 
