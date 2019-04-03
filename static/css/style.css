@@ -15,8 +15,12 @@ img {
 
 }
 
-.navbar {
+.btn {
     height: 30px;
+}
+
+.navbar {
+    height: 35px;
 }
 
 .form-control {
