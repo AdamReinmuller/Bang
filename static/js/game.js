@@ -28,15 +28,22 @@ function shuffleCards(array) {
 class Player { //cards: dictionary
     constructor(name, hp, role, position, range, features, cards) {
         this.name = name;
-        this.hp = hp;
-        this.hpImage = this.getHpImage();
         this.role = role;
+        this.hp = this.sheriffHp() + hp;
+        this.hpImage = this.getHpImage();
         this.roleImage = this.getRoleImage();
         this.roleImageBackSide = 'static/images/rolebackside.png';
         this.range = range;
         this.position = position;
         this.hand = new Cards(cards);
         this.features = features;
+    }
+
+    sheriffHp() {
+        if (this.role === 'Sheriff') {
+            return 1
+        }
+        else {return 0}
     }
 
     getHpImage() {
@@ -126,15 +133,6 @@ class Cards {
 }
 
 
-let bang2miss2 = {'bang': 3, 'missed': 3};
-let bang1miss1 = {'bang': 1, 'missed': 1};
-
-let player = new Player('Raj',4, "Renegade", 2, 1, 4, bang2miss2);
-let enemy1 = new Player('Kristóf',3, "Bandit", 2, [], 4, bang2miss2);
-let enemy2 = new Player('Simó',2, "Sheriff", 2, [], 4, bang1miss1);
-let enemy3 = new Player('Dombi',1, "Deputy", 2, [], 4, bang1miss1);
-
-
 function updatePlayerStats(){
 
     function getImage(src) {
@@ -156,6 +154,10 @@ function updatePlayerStats(){
     //roleImage
     document.getElementById('role').innerHTML = `
     ${getImage(player.roleImage)}
+    `;
+    //names
+    document.getElementById('playerName').innerText = `
+    ${player.name}
     `;
 
 
@@ -179,6 +181,10 @@ function updatePlayerStats(){
         ${getImage(enemy1.roleImageBackSide)}
         `
     }
+    //names
+    document.getElementById('enemy1Name').innerText = `
+    ${enemy1.name}
+    `;
 
 
     //enemy2
@@ -201,6 +207,10 @@ function updatePlayerStats(){
         ${getImage(enemy2.roleImageBackSide)}
         `
     }
+    //names
+    document.getElementById('enemy2Name').innerText = `
+    ${enemy2.name}
+    `;
 
 
     //enemy3
@@ -223,7 +233,34 @@ function updatePlayerStats(){
         ${getImage(enemy3.roleImageBackSide)}
         `
     }
-
+    //names
+    document.getElementById('enemy3Name').innerText = `
+    ${enemy3.name}
+    `;
 }
+
+
+function rotatePlayers(){
+//switches the players in clockwise fashion
+    let temp = player;
+    player = enemy3;
+    enemy3 = enemy2;
+    enemy2 = enemy1;
+    enemy1 = temp;
+}
+
+
+let bang2miss2 = {'bang': 3, 'missed': 3};
+let bang1miss1 = {'bang': 1, 'missed': 1};
+
+let player = new Player('Raj',4, "Renegade", 0, 1, 4, bang2miss2);
+let enemy1 = new Player('Kristóf',3, "Bandit", 1, 1, 4, bang2miss2);
+let enemy2 = new Player('Simó',3, "Sheriff", 2, 1, 4, bang1miss1);
+let enemy3 = new Player('Dombi',1, "Deputy", 3, 1, 4, bang1miss1);
+
+
+updatePlayerStats();
+
+// rotatePlayers();
 
 updatePlayerStats();

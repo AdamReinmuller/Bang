@@ -10,6 +10,11 @@ img {
 
 }
 
+.navbar {
+    height: 20px;
+
+}
+
 #bootstrap-overrides table {
     border: transparent;
 
