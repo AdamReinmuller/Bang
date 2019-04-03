@@ -31,6 +31,7 @@ class Player { //cards: dictionary
         this.hpImage = this.getHpImage();
         this.role = role;
         this.roleImage = this.getRoleImage();
+        this.roleImageBackSide = 'static/images/rolebackside.png';
         this.range = range;
         this.position = position;
         this.hand = new Cards(cards);
@@ -42,8 +43,18 @@ class Player { //cards: dictionary
     }
 
     getRoleImage() {
-        if (this.role === 'Sheriff')
-        return `static/images/Sheriff`
+        if (this.role === 'Sheriff') {
+            return `static/images/sheriff.png`
+        }
+        else if (this.role === 'Renegade') {
+            return 'static/images/renegade.png'
+        }
+        else if (this.role === 'Bandit') {
+            return 'static/images/bandit.png'
+        }
+        else {
+            return 'static/images/deputy.png'
+        }
     }
 
     bang(target) {
@@ -117,54 +128,101 @@ class Cards {
 let bang2miss2 = {'bang': 3, 'missed': 3};
 let bang1miss1 = {'bang': 1, 'missed': 1};
 
-let player = new Player(4, "Scheriff", 2, 1, 4, bang2miss2);
-let enemy1 = new Player(3, "Scheriff", 2, [], 4, bang2miss2);
-let enemy2 = new Player(2, "Scheriff", 2, [], 4, bang1miss1);
-let enemy3 = new Player(1, "Scheriff", 2, [], 4, bang1miss1);
+let player = new Player(2, "Deputy", 2, 1, 4, bang2miss2);
+let enemy1 = new Player(3, "Bandit", 2, [], 4, bang2miss2);
+let enemy2 = new Player(2, "Sheriff", 2, [], 4, bang1miss1);
+let enemy3 = new Player(4, "Deputy", 2, [], 4, bang1miss1);
 
 
+function updatePlayerStats(){
 
-let frontsideOfPlayer = player.hand.frontSide;
-let backsideOfEnemy1 = enemy1.hand.backSide;
-let backsideOfEnemy2 = enemy2.hand.backSide;
-let backsideOfEnemy3 = enemy3.hand.backSide;
+    function getImage(src) {
+        return `
+    <img src="/${src}" alt="">
+    `
+    }
 
 
-function getImage(src) {
-    return `
-<img src="/${src}" alt="">
-`
+    //currentPlayer
+    //cardsImage
+    document.getElementById('playerHand').innerHTML = `
+    ${player.hand.frontSide.map(getImage).join('')}
+    `;
+    //HPImage
+    document.getElementById('HP').innerHTML = `
+    ${getImage(player.hpImage)}
+    `;
+    //roleImage
+    document.getElementById('role').innerHTML = `
+    ${getImage(player.roleImage)}
+    `;
+
+
+    //enemy1
+    //cardsImage
+    document.getElementById('enemy1Hand').innerHTML = `
+    ${enemy1.hand.backSide.map(getImage).join('')}
+    `;
+    //HPImage
+    document.getElementById('enemy1HP').innerHTML = `
+    ${getImage(enemy1.hpImage)}
+    `;
+    //roleImage
+    if (enemy1.role === 'Sheriff') {
+        document.getElementById('enemy1Role').innerHTML = `
+        ${getImage(enemy1.roleImage)}
+        `
+    }
+    else {
+        document.getElementById('enemy1Role').innerHTML = `
+        ${getImage(enemy1.roleImageBackSide)}
+        `
+    }
+
+
+    //enemy2
+    //cardsImage
+    document.getElementById('enemy2Hand').innerHTML = `
+    ${enemy2.hand.backSide.map(getImage).join('')}
+    `;
+    //HPImage
+    document.getElementById('enemy2HP').innerHTML = `
+    ${getImage(enemy2.hpImage)}
+    `;
+    //roleImage
+    if (enemy2.role === 'Sheriff') {
+        document.getElementById('enemy2Role').innerHTML = `
+        ${getImage(enemy2.roleImage)}
+        `
+    }
+    else {
+        document.getElementById('enemy2Role').innerHTML = `
+        ${getImage(enemy2.roleImageBackSide)}
+        `
+    }
+
+
+    //enemy3
+    //cardsImage
+    document.getElementById('enemy3Hand').innerHTML = `
+    ${enemy3.hand.backSide.map(getImage).join('')}
+    `;
+    //HPImage
+    document.getElementById('enemy3HP').innerHTML = `
+    ${getImage(enemy3.hpImage)}
+    `;
+    //roleImage
+    if (enemy3.role === 'Sheriff') {
+        document.getElementById('enemy3Role').innerHTML = `
+        ${getImage(enemy3.roleImage)}
+        `
+    }
+    else {
+        document.getElementById('enemy3Role').innerHTML = `
+        ${getImage(enemy3.roleImageBackSide)}
+        `
+    }
+
 }
 
-
-document.getElementById('playerHand').innerHTML = `
-${frontsideOfPlayer.map(getImage).join('')}
-`;
-document.getElementById('HP').innerHTML = `
-${getImage(player.hpImage)}
-`;
-
-
-document.getElementById('enemy1Hand').innerHTML = `
-${backsideOfEnemy1.map(getImage).join('')}
-`;
-document.getElementById('enemy1HP').innerHTML = `
-${getImage(enemy1.hpImage)}
-`;
-
-
-
-document.getElementById('enemy2Hand').innerHTML = `
-${backsideOfEnemy2.map(getImage).join('')}
-`;
-document.getElementById('enemy2HP').innerHTML = `
-${getImage(enemy2.hpImage)}
-`;
-
-
-document.getElementById('enemy3Hand').innerHTML = `
-${backsideOfEnemy3.map(getImage).join('')}
-`;
-document.getElementById('enemy3HP').innerHTML = `
-${getImage(enemy3.hpImage)}
-`;
+updatePlayerStats();
