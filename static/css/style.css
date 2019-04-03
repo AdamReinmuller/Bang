@@ -1,5 +1,4 @@
 body {
-    padding: 80px 20px;
     background-image: url("../images/background.jpg");
     background-repeat: repeat;
     font-family: 'Acme', sans-serif;
@@ -8,6 +7,11 @@ body {
 
 img {
     border-radius: 12px;
+
+}
+
+.navbar {
+    height: 20px;
 
 }
 
@@ -25,7 +29,7 @@ img {
 }
 
 #table {
-    margin-top: 20%;
+    margin-top: 15%;
     margin-left: 30%;
     position: absolute;
     text-align: center;
@@ -40,8 +44,8 @@ img {
 }
 
 #cardZoom {
-    height: 20px;
-    width: 20px;
+    height: 18px;
+    width: 18px;
     position: relative;
     left: 1200px;
     top: -400px;
@@ -163,7 +167,7 @@ img {
     transform: rotate(180deg);
     float: top;
     text-align: center;
-    margin-top: -5%;
+    margin-top: 0%;
     margin-right: 30%;
     border: 0;
 }
