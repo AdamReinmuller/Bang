@@ -254,6 +254,41 @@ let enemy3 = new Player('Dombi',1, "Deputy", 2, [], 4, bang1miss1);
 let players = [player, enemy1, enemy2, enemy3];
 
 
+
+let playerCards = document.getElementById('playerHand');
+let zoomCardToReplace = document.querySelector('#cardZoom img');
+let targetZoom = document.querySelector('#cardZoom');
+
+playerCards.addEventListener('click', function (e) {
+    if (e.target.tagName === 'IMG') {
+        if (zoomCardToReplace.getAttribute('src') === " ") {
+            let handCard = e.target;
+            let handCardSrc = handCard.getAttribute('src');
+            zoomCardToReplace.setAttribute("src", handCardSrc);
+            handCard.remove();
+        }
+    }
+});
+
+
+
+targetZoom.addEventListener('click', function (e) {
+    if (e.target.tagName === 'IMG'){
+        if (e.target.getAttribute('src') !== " "){
+            let srcCardGoBackToHand = e.target.getAttribute('src');
+            let cardGoBackToHand = document.createElement('img');
+            cardGoBackToHand.setAttribute('src', srcCardGoBackToHand);
+            playerCards.appendChild(cardGoBackToHand);
+            zoomCardToReplace.setAttribute('src', ' ' )
+        }
+    }
+
+});
+
+
+
+
+
 updatePlayerStats();
 
 rotatePlayers();

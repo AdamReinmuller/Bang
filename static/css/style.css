@@ -57,12 +57,17 @@ img {
     left: 1200px;
     top: -400px;
     border-radius: 20px;
+    border: 0 solid transparent;
 
 }
 
 #cardZoom {
     border-radius: 12px;
 
+}
+
+#cardZoom img{
+    border: 0 solid transparent;
 }
 
 #deck img {
