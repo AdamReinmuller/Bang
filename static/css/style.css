@@ -71,6 +71,8 @@ img {
     left: 1200px;
     top: -400px;
     border-radius: 20px;
+    border: 0 solid transparent;
+    border-collapse: collapse;
 
 }
 

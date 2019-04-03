@@ -6,3 +6,6 @@ restartButt.addEventListener("click", function () {
 });
 
 
+player.hand.addEventListener("click", function (){
+    alert("lofasz");
+});
