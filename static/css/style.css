@@ -160,3 +160,9 @@ body {
     margin-top: 20%;
     margin-right: -10%;
 }
+
+.pop-up-card {
+    position: absolute;
+    height: 500px;
+    width: 400px;
+}

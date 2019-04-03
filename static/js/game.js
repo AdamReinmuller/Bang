@@ -46,14 +46,11 @@ class Player { //cards: dictionary
     getRoleImage() {
         if (this.role === 'Sheriff') {
             return `static/images/sheriff.png`
-        }
-        else if (this.role === 'Renegade') {
+        } else if (this.role === 'Renegade') {
             return 'static/images/renegade.png'
-        }
-        else if (this.role === 'Bandit') {
+        } else if (this.role === 'Bandit') {
             return 'static/images/bandit.png'
-        }
-        else {
+        } else {
             return 'static/images/deputy.png'
         }
     }
@@ -129,13 +126,13 @@ class Cards {
 let bang2miss2 = {'bang': 3, 'missed': 3};
 let bang1miss1 = {'bang': 1, 'missed': 1};
 
-let player = new Player('Raj',4, "Renegade", 2, 1, 4, bang2miss2);
-let enemy1 = new Player('Kristóf',3, "Bandit", 2, [], 4, bang2miss2);
-let enemy2 = new Player('Simó',2, "Sheriff", 2, [], 4, bang1miss1);
-let enemy3 = new Player('Dombi',1, "Deputy", 2, [], 4, bang1miss1);
+let player = new Player('Raj', 4, "Renegade", 2, 1, 4, bang2miss2);
+let enemy1 = new Player('Kristóf', 3, "Bandit", 2, [], 4, bang2miss2);
+let enemy2 = new Player('Simó', 2, "Sheriff", 2, [], 4, bang1miss1);
+let enemy3 = new Player('Dombi', 1, "Deputy", 2, [], 4, bang1miss1);
 
 
-function updatePlayerStats(){
+function updatePlayerStats() {
 
     function getImage(src) {
         return `
@@ -173,8 +170,7 @@ function updatePlayerStats(){
         document.getElementById('enemy1Role').innerHTML = `
         ${getImage(enemy1.roleImage)}
         `
-    }
-    else {
+    } else {
         document.getElementById('enemy1Role').innerHTML = `
         ${getImage(enemy1.roleImageBackSide)}
         `
@@ -195,8 +191,7 @@ function updatePlayerStats(){
         document.getElementById('enemy2Role').innerHTML = `
         ${getImage(enemy2.roleImage)}
         `
-    }
-    else {
+    } else {
         document.getElementById('enemy2Role').innerHTML = `
         ${getImage(enemy2.roleImageBackSide)}
         `
@@ -217,8 +212,7 @@ function updatePlayerStats(){
         document.getElementById('enemy3Role').innerHTML = `
         ${getImage(enemy3.roleImage)}
         `
-    }
-    else {
+    } else {
         document.getElementById('enemy3Role').innerHTML = `
         ${getImage(enemy3.roleImageBackSide)}
         `
@@ -226,4 +220,20 @@ function updatePlayerStats(){
 
 }
 
+document.addEventListener('DOMContentLoaded', function () {
+    let playerCards = document.getElementById('playerHand');
+    playerCards.addEventListener('click', function (e) {
+        if (e.target.tagName === 'IMG') {
+            e.target.style = ('pop-up-card')
+            //e.target.remove();
+        }
+    })
+});
+
+
 updatePlayerStats();
+
+
+
+
+
