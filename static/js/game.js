@@ -271,7 +271,67 @@ players.push(enemy2);
 let enemy3 = new Player('Dombi', 4, "Deputy", 1, 1, [], bang1miss1);
 players.push(enemy3);
 
+function eventListenerVariablesForCardZoom() {
 
+    let playerCards = document.getElementById('playerHand');
+    let zoomCardToReplace = document.querySelector('#cardZoom img');
+    let targetZoom = document.querySelector('#cardZoom');
+
+    playerCards.addEventListener('click', function (e) {
+        if (e.target.tagName === 'IMG') {
+            if (targetZoom.dataset.enableHoover === 'true') {
+                console.log('click event after if');
+                let handCard = e.target;
+                let handCardSrc = handCard.getAttribute('src');
+                zoomCardToReplace.setAttribute("src", handCardSrc);
+                handCard.remove();
+                targetZoom.dataset.enableHoover = 'false';
+
+
+            }
+        }
+    });
+
+    targetZoom.addEventListener('click', function (e) {
+        if (e.target.tagName === 'IMG') {
+            if (e.target.getAttribute('src') !== " ") {
+                let srcCardGoBackToHand = e.target.getAttribute('src');
+                let cardGoBackToHand = document.createElement('img');
+                cardGoBackToHand.setAttribute('src', srcCardGoBackToHand);
+                playerCards.appendChild(cardGoBackToHand);
+                zoomCardToReplace.setAttribute('src', ' ');
+                targetZoom.dataset.enableHoover = 'true';
+
+            }
+        }
+    });
+
+    playerCards.addEventListener('mouseover', function (e) {
+            if (targetZoom.dataset.enableHoover === 'true') {
+                if (e.target.tagName === 'IMG') {
+                    console.log('hoover over event');
+                    let handCard = e.target;
+                    let handCardSrc = handCard.getAttribute('src');
+                    zoomCardToReplace.setAttribute("src", handCardSrc);
+                }
+
+            }
+        }
+    );
+
+    playerCards.addEventListener('mouseout', function (e) {
+            if (targetZoom.dataset.enableHoover === 'true') {
+                if (e.target.tagName === 'IMG') {
+                    console.log('hoover out event');
+                    zoomCardToReplace.setAttribute("src", ' ');
+                }
+            }
+        }
+    );
+
+}
+
+eventListenerVariablesForCardZoom();
 updateDOM();
 
 
