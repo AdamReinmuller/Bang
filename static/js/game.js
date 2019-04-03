@@ -4,6 +4,8 @@ let enemyIDs = ['enemy1','enemy2','enemy3'];
 
 let players = {};
 
+let clickcount = 0;
+
 let fullDeck = {
     'bang': 8,
     'missed': 8
@@ -255,6 +257,14 @@ function updateNames(){
 
 }
 
+function updateNamesReverse(){
+    player = players["player"];
+    enemy1 = players["enemy1"];
+    enemy2 = players["enemy2"];
+    enemy3 = players["enemy3"];
+
+}
+
 let bang2miss2 = {'bang': 3, 'missed': 3};
 let bang1miss1 = {'bang': 1, 'missed': 1};
 
@@ -282,9 +292,6 @@ function setImgSrc(id, card_img_src) {
 
 function bang() {
     console.log("Hi, you pressed bang!");
-    //addingListenersToEnemies();
-    rotatePlayers();
-    updatePlayerStats();
     addingListenersToEnemies();
 
 
@@ -293,23 +300,38 @@ function bang() {
 
 function addingListenersToEnemies() {
     for(let i = 0; i < 3; i++){
-        document.getElementById(enemyIDs[i]).addEventListener("click", function(){ enemyShooter(enemyIDs[i])}); //
+        document.getElementById(enemyIDs[i]).addEventListener("click", () =>{ enemyShooter(enemyIDs[i])}); //
     }
 }
 
 function enemyShooter(me) {
-    console.log("yo. you pressed me: " + players[me].name);
+    console.log(players["player"].name  + " shot on: " + players[me].name);
+    let temporary_player = players['player'];
+    let temporary_enemy = players[me];
+
+    players[me] = players['player'];
+    players['player'] = temporary_enemy;
+
+    updateNamesReverse();
+    updatePlayerStats();
+
+
+
+    //valasztas: vagy end of turn     vagy: vedekezes
 
 
 }
 
-function onEnemyClick() {
-    safetyCounter = 0;
-    while (player != target && safetyCounter < 8){
-        rotatePlayers();
-        safetyCounter++;
-    }
 
 
-}
-
+let myClick = (function (click_count) {
+    let handler = function (event) {
+        click_count++;
+        if (click_count > 0) {
+            // to remove
+            document.removeEventListener('click', handler);
+            click_count++;
+        }
+    };
+    return handler;
+})(0);
