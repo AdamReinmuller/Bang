@@ -224,7 +224,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let playerCards = document.getElementById('playerHand');
     playerCards.addEventListener('click', function (e) {
         if (e.target.tagName === 'IMG') {
-            e.target.style = ('pop-up-card')
+
             //e.target.remove();
         }
     })
