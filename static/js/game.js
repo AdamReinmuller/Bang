@@ -242,6 +242,17 @@ function rotatePlayers(){
     enemy3.distance = 1;
 }
 
+function preSetGame() {
+    let cheatCode = document.getElementById("cheatCode");
+    cheatCode.addEventListener("click", function () {
+        let player = new Player('Raj', 1, "Renegade", 1, 1, 4, bang2miss2);
+        let enemy1 = new Player('Kristóf', 2, "Bandit", 3, 1, 4, bang2miss2);
+        let enemy2 = new Player('Simó', 3, "Sheriff", 0, 1, 4, bang1miss1);
+        let enemy3 = new Player('Dombi', 4, "Deputy", 2, 1, 4, bang1miss1);
+
+    })
+}
+
 let fullDeck = {
     'bang': 8,
     'missed': 8
@@ -260,6 +271,7 @@ players.push(enemy2);
 let enemy3 = new Player('Dombi',1, "Deputy", 1, 1, [], bang1miss1);
 players.push(enemy3);
 
+preSetGame()
 
 updateDOM();
 player.bang(enemy1);
