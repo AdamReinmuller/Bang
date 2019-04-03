@@ -28,15 +28,22 @@ function shuffleCards(array) {
 class Player { //cards: dictionary
     constructor(name, hp, role, position, range, features, cards) {
         this.name = name;
-        this.hp = hp;
-        this.hpImage = this.getHpImage();
         this.role = role;
+        this.hp = this.sheriffHp() + hp;
+        this.hpImage = this.getHpImage();
         this.roleImage = this.getRoleImage();
         this.roleImageBackSide = 'static/images/rolebackside.png';
         this.range = range;
         this.position = position;
         this.hand = new Cards(cards);
         this.features = features;
+    }
+
+    sheriffHp() {
+        if (this.role === 'Sheriff') {
+            return 1
+        }
+        else {return 0}
     }
 
     getHpImage() {
@@ -246,16 +253,14 @@ function rotatePlayers(){
 let bang2miss2 = {'bang': 3, 'missed': 3};
 let bang1miss1 = {'bang': 1, 'missed': 1};
 
-let player = new Player('Raj',4, "Renegade", 2, 1, 4, bang2miss2);
-let enemy1 = new Player('Kristóf',3, "Bandit", 2, [], 4, bang2miss2);
-let enemy2 = new Player('Simó',2, "Sheriff", 2, [], 4, bang1miss1);
-let enemy3 = new Player('Dombi',1, "Deputy", 2, [], 4, bang1miss1);
-
-let players = [player, enemy1, enemy2, enemy3];
+let player = new Player('Raj',4, "Renegade", 0, 1, 4, bang2miss2);
+let enemy1 = new Player('Kristóf',3, "Bandit", 1, 1, 4, bang2miss2);
+let enemy2 = new Player('Simó',3, "Sheriff", 2, 1, 4, bang1miss1);
+let enemy3 = new Player('Dombi',1, "Deputy", 3, 1, 4, bang1miss1);
 
 
 updatePlayerStats();
 
-rotatePlayers();
+// rotatePlayers();
 
 updatePlayerStats();
