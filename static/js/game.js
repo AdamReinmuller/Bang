@@ -234,7 +234,8 @@ function updatePlayerStats(){
 
 
 function rotatePlayers(){
-    let temp = play1;
+//switches the players in clockwise fashion
+    let temp = player;
     player = enemy3;
     enemy3 = enemy2;
     enemy2 = enemy1;
@@ -255,8 +256,6 @@ let players = [player, enemy1, enemy2, enemy3];
 
 updatePlayerStats();
 
-
-//switches the players in clockwise fashion
-
+rotatePlayers();
 
 updatePlayerStats();
