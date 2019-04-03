@@ -6,6 +6,10 @@ body {
     color: black;
 }
 
+img {
+    border-radius: 12px;
+
+}
 
 #bootstrap-overrides table {
     border: transparent;
@@ -14,9 +18,7 @@ body {
 
 #player {
     position: absolute;
-    bottom: 0%;
-    width: 60%;
-    left: 20%;
+    left: 30%;
     text-align: center;
 }
 
@@ -25,34 +27,52 @@ body {
     margin-left: 30%;
     position: absolute;
     text-align: center;
-
 }
 
 #graveyard img {
-    height: 300px;
-    width: 200px;
+    height: 250px;
+    width: 150px;
     vertical-align: middle;
+    border-radius: 12px;
+
+}
+
+#cardZoom {
+    height: 20px;
+    width: 20px;
+    position: relative;
+    left: 1200px;
+    top: -400px;
+    border-radius: 12px;
+
+}
+
+#cardZoom {
+    border-radius: 12px;
+
 }
 
 #deck img {
-    height: 300px;
-    width: 200px;
+    height: 250px;
+    width: 150px;
     vertical-align: middle;
+    border-radius: 12px;
+
 }
 
 #player #blues img {
-    height: 120px;
-    width: 100px;
+    height: 100px;
+    width: 60px;
 }
 
 #player #role img {
-    height: 120px;
-    width: 300px;
+    height: 100px;
+    width: 200px;
 }
 
 #player #HP img {
-    height: 120px;
-    width: 300px;
+    height: 100px;
+    width: 200px;
 }
 
 #player #playerHand img {
@@ -61,65 +81,64 @@ body {
 }
 
 #enemy1Role img {
-    height:100px;
+    height: 100px;
     width: 100px;
 }
 
 #enemy1HP img {
-    height:100px;
+    height: 100px;
     width: 150px;
 }
 
 #enemy1Blues img {
-    height:100px;
-    width: 100px;
+    height: 100px;
+    width: 60px;
 }
 
 #enemy1Hand img {
-    height:100px;
-    width: 100px;
+    height: 120px;
+    width: 80px;
 }
 
 #enemy2Role img {
-    height:100px;
+    height: 100px;
     width: 100px;
 }
 
 #enemy2HP img {
-    height:100px;
+    height: 100px;
     width: 150px;
 }
 
 #enemy2Blues img {
-    height:100px;
-    width: 100px;
+    height: 100px;
+    width: 60px;
 }
 
 #enemy2Hand img {
-    height:100px;
-    width: 100px;
+    height: 120px;
+    width: 80px;
 }
 
 #enemy3Role img {
-    height:100px;
+    height: 100px;
     width: 100px;
 }
 
 #enemy3HP img {
-    height:100px;
+    height: 100px;
     width: 150px;
 }
 
 #enemy3Blues img {
-    height:100px;
-    width: 100px;
+    height: 100px;
+    width: 60px;
 }
 
 #enemy3Hand img {
-    height:100px;
-    width: 100px;
+    height: 120px;
+    width: 80px;
 }
-
 
 
 #enemy1 {
@@ -131,7 +150,7 @@ body {
     float: left;
     text-align: center;
     margin-top: 20%;
-    margin-left: -8%;
+    margin-left: -10%;
 }
 
 #enemy2 {
@@ -143,7 +162,7 @@ body {
     float: top;
     text-align: center;
     margin-top: -5%;
-    margin-right: 10%;
+    margin-right: 20%;
     border: 0;
 }
 
@@ -158,5 +177,5 @@ body {
     float: right;
     text-align: center;
     margin-top: 20%;
-    margin-right: -10%;
+    margin-right: -8%;
 }
