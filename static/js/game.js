@@ -57,7 +57,7 @@ class Player { //cards: dictionary
         if (this.hand.cards.bang > 0 && this.range >= target.distance) {
             target.hp -= 1;
             this.removeCard('bang');
-            // alert(this.name + ' banged ' + target.name + ' successfully')
+            alert(this.name + ' banged ' + target.name + ' successfully')
         }
         else {
             alert('Out of range')
@@ -242,12 +242,20 @@ function rotatePlayers(){
     enemy3.distance = 1;
 }
 
+function getEnemyDoms() {
+    let enemyDoms = [];
+    enemyDoms.push(document.getElementById('enemy1'));
+    enemyDoms.push(document.getElementById('enemy2'));
+    enemyDoms.push(document.getElementById('enemy3'));
+    return enemyDoms
+}
+
 let fullDeck = {
     'bang': 8,
     'missed': 8
 };
 
-let bang2miss2 = {'bang': 3, 'missed': 3};
+let bang2miss2 = {'bang': 2, 'missed': 2};
 let bang1miss1 = {'bang': 1, 'missed': 1};
 
 let players = [];
@@ -261,8 +269,41 @@ let enemy3 = new Player('Dombi',1, "Deputy", 1, 1, [], bang1miss1);
 players.push(enemy3);
 
 
+
 updateDOM();
-player.bang(enemy1);
-updateDOM();
-player.bang(enemy1);
+
+
+function addToLocalstorage() {
+    alert('localstorage set');
+    localStorage.setItem('card', 'bang')
+}
+function clearLocalstorage() {
+    localStorage.clear()
+}
+
+
+
+let cards = document.getElementById('playerHand').children;
+for (card of cards) {
+    if (card.outerHTML === `<img src="/static/images/bang.png" alt="">`) {
+        card.addEventListener('click', addToLocalstorage)
+    }
+    // else if(card.outerHTML === `<img src="/static/images/miss.png" alt="">`) {
+    //     card.addEventListener('click', dodgeBang)
+    // }
+}
+
+// document.querySelector('#cardZoom img').addEventListener('click', function () {
+//     localStorage.clear()
+// });
+
+let enemyDoms = getEnemyDoms();
+
+for (let enemy of enemyDoms) {
+    enemy.addEventListener('click', function() {
+        if (localStorage.getItem('card') === 'bang') {
+            player.bang(event.target)
+        }
+    })
+}
 updateDOM();
