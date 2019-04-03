@@ -1,5 +1,4 @@
 body {
-    padding: 80px 20px;
     background-image: url("../images/background.jpg");
     background-repeat: repeat;
     font-family: 'Acme', sans-serif;
@@ -11,20 +10,27 @@ img {
 
 }
 
+.navbar {
+    height: 20px;
+
+}
+
 #bootstrap-overrides table {
     border: transparent;
 
 }
 
 #player {
+
     position: absolute;
+    bottom: 0;
     left: 30%;
     bottom: 0;
     text-align: center;
 }
 
 #table {
-    margin-top: 20%;
+    margin-top: 15%;
     margin-left: 30%;
     position: absolute;
     text-align: center;
@@ -39,12 +45,12 @@ img {
 }
 
 #cardZoom {
-    height: 20px;
-    width: 20px;
+    height: 18px;
+    width: 18px;
     position: relative;
     left: 1200px;
     top: -400px;
-    border-radius: 12px;
+    border-radius: 20px;
 
 }
 
@@ -62,23 +68,23 @@ img {
 }
 
 #player #blues img {
-    height: 100px;
+    height: 80px;
     width: 60px;
 }
 
 #player #role img {
-    height: 100px;
-    width: 200px;
+    height: 80px;
+    width: 160px;
 }
 
 #player #HP img {
-    height: 100px;
-    width: 200px;
+    height: 80px;
+    width: 160px;
 }
 
 #player #playerHand img {
-    height: 150px;
-    width: 100px;
+    height: 120px;
+    width: 90px;
 }
 
 #enemy1Role img {
@@ -162,9 +168,17 @@ img {
     transform: rotate(180deg);
     float: top;
     text-align: center;
-    margin-top: -5%;
-    margin-right: 20%;
+    margin-top: 0%;
+    margin-right: 30%;
     border: 0;
+}
+
+#enemy2Name {
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    transform: rotate(180deg);
 }
 
 #enemy3 {
