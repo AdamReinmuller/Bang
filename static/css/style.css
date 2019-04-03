@@ -168,6 +168,14 @@ img {
     border: 0;
 }
 
+#enemy2Name {
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+
 #enemy3 {
     border: 0 solid transparent;
     border-collapse: collapse;
