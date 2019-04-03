@@ -2,6 +2,7 @@
 
 {% block head %}
     <script src="{{ url_for('static', filename='js/game.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='js/uijava.js') }}" defer></script>
 {% endblock %}
 
 {% block content %}
@@ -20,13 +21,6 @@
 
                     </div>
                 </td>
-                <td>
-                    <button type="button" class="btn btn-danger">Action</button>
-                </td>
-
-                <td>
-                    <button type="button" class="btn btn-warning">End turn</button>
-                </td>
             </tr>
         </table>
 
@@ -35,7 +29,7 @@
 
 
     <div id="player">
-        <table class="table table-bordered table-dark">
+        <table class="table table-bordered table-hover">
             <tr>
                 <td colspan="3">
                     <div id="playerName">player's name</div>
@@ -67,12 +61,7 @@
             <tr>
                 <td colspan="3">
                     <div id="playerHand">
-                        <img src="/static/images/miss.png" alt="">
-                        <img src="/static/images/miss.png" alt="">
-                        <img src="/static/images/miss.png" alt="">
-                        <img src="/static/images/miss.png" alt="">
-                        <img src="/static/images/miss.png" alt="">
-                        <img src="/static/images/miss.png" alt="">
+
 
                     </div>
                 </td>
@@ -207,7 +196,7 @@
     </div>
 
     <div id="cardZoom" data-enable-hoover="true">
-        <img src=" ">
+        <img src=" " alt="">
     </div>
 
 {% endblock %}

@@ -1,21 +1,3 @@
-let fullDeck = {
-    'bang': 8,
-    'missed': 8
-};
-
-// function dictToArray(dict) {
-//     fArray = [];
-//     let keys = Object.keys(dict);
-//     let values = Object.values(dict);
-//     for (let i = 0; i < keys.length; i++) {
-//         for (let num = 0; num < values[i]; num++) {
-//             fArray.push(keys[i])
-//         }
-//     }
-//     return fArray
-// }
-
-
 function shuffleCards(array) {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -41,15 +23,17 @@ class Player { //cards: dictionary
     getMustang() {
         if (this.features.includes('Mustang')) {
             return 1
+        } else {
+            return 0
         }
-        else {return 0}
     }
 
     sheriffHp() {
         if (this.role === 'Sheriff') {
             return 1
+        } else {
+            return 0
         }
-        else {return 0}
     }
 
     getHpImage() {
@@ -73,8 +57,7 @@ class Player { //cards: dictionary
             target.hp -= 1;
             this.removeCard('bang');
             // alert(this.name + ' banged ' + target.name + ' successfully')
-        }
-        else {
+        } else {
             alert('Out of range')
         }
     };
@@ -137,7 +120,7 @@ class Cards {
 }
 
 
-function updateDOM(){
+function updateDOM() {
 
     function getImage(src) {
         return `
@@ -241,7 +224,7 @@ function updateDOM(){
 }
 
 
-function rotatePlayers(){
+function rotatePlayers() {
 //switches the players in clockwise fashion and updates their distance
     let temp = player;
     player = enemy3;
@@ -254,18 +237,38 @@ function rotatePlayers(){
     enemy3.distance = 1;
 }
 
+let cheatCode = document.getElementById("cheatCode");
+
+/*
+function preSetGame() {
+
+    cheatCode.addEventListener("click", function () {
+        player = new Player('Raj', 1, "Renegade", 1, 1, 4, bang2miss2);
+        enemy1 = new Player('Kristóf', 2, "Bandit", 3, 1, 4, bang2miss2);
+        enemy2 = new Player('Simó', 3, "Sheriff", 0, 1, 4, bang1miss1);
+        enemy3 = new Player('Dombi', 4, "Deputy", 2, 1, 4, bang1miss1);
+        location.reload();
+        player.name = "Lófasz";
+    })
+}
+*/
+
+let fullDeck = {
+    'bang': 8,
+    'missed': 8
+};
 
 let bang2miss2 = {'bang': 3, 'missed': 3};
 let bang1miss1 = {'bang': 1, 'missed': 1};
 
 let players = [];
-let player = new Player('Raj',4, "Renegade", 0, 1, [], bang2miss2);
+let player = new Player('Raj', 4, "Renegade", 0, 1, [], bang2miss2);
 players.push(player);
-let enemy1 = new Player('Kristóf',3, "Bandit", 1, 1, [], bang2miss2);
+let enemy1 = new Player('Kristóf', 4, "Bandit", 1, 1, [], bang2miss2);
 players.push(enemy1);
-let enemy2 = new Player('Simó',2, "Sheriff", 2, 1, [], bang1miss1);
+let enemy2 = new Player('Simó', 4, "Sheriff", 2, 1, [], bang1miss1);
 players.push(enemy2);
-let enemy3 = new Player('Dombi',1, "Deputy", 1, 1, [], bang1miss1);
+let enemy3 = new Player('Dombi', 4, "Deputy", 1, 1, [], bang1miss1);
 players.push(enemy3);
 
 function eventListenerVariablesForCardZoom() {
@@ -328,6 +331,7 @@ function eventListenerVariablesForCardZoom() {
 
 }
 
+eventListenerVariablesForCardZoom();
 updateDOM();
 
-eventListenerVariablesForCardZoom();
+

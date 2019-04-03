@@ -10,13 +10,22 @@ img {
 
 }
 
+.navbar {
+    height: 20px;
+
+}
+
 #bootstrap-overrides table {
     border: transparent;
 
 }
 
-.navbar {
+.btn {
     height: 30px;
+}
+
+.navbar {
+    height: 35px;
 }
 
 .form-control {
@@ -27,12 +36,20 @@ img {
     height: 30px;
 }
 
+#endTurnButton {
+    background-color: red;
+}
 
 #player {
     position: absolute;
     bottom: -12px;
     left: 28%;
     text-align: center;
+}
+
+#playername {
+    height: 5px;
+    width: 40px;
 }
 
 #table {
@@ -58,16 +75,13 @@ img {
     top: -400px;
     border-radius: 20px;
     border: 0 solid transparent;
+    border-collapse: collapse;
 
 }
 
 #cardZoom {
     border-radius: 12px;
 
-}
-
-#cardZoom img{
-    border: 0 solid transparent;
 }
 
 #deck img {
@@ -119,22 +133,22 @@ img {
 }
 
 #enemy2Role img {
-    height: 100px;
-    width: 100px;
+    height: 90px;
+    width: 120px;
 }
 
 #enemy2HP img {
-    height: 100px;
+    height: 90px;
     width: 150px;
 }
 
 #enemy2Blues img {
-    height: 100px;
+    height: 90px;
     width: 60px;
 }
 
 #enemy2Hand img {
-    height: 120px;
+    height: 110px;
     width: 80px;
 }
 
@@ -168,7 +182,7 @@ img {
     float: left;
     text-align: center;
     margin-top: 20%;
-    margin-left: -8%;
+    margin-left: -7%;
 }
 
 #enemy2 {
@@ -179,7 +193,7 @@ img {
     transform: rotate(180deg);
     float: top;
     text-align: center;
-    margin-top: 0%;
+    margin-top: 0;
     margin-right: 28%;
     border: 0;
 }
@@ -203,5 +217,5 @@ img {
     float: right;
     text-align: center;
     margin-top: 20%;
-    margin-right: -110px;
+    margin-right: -5%;
 }
