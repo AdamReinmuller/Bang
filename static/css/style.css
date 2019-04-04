@@ -20,13 +20,36 @@ img {
 
 }
 
-#player {
+.btn {
+    height: 30px;
+}
 
+.navbar {
+    height: 35px;
+}
+
+.form-control {
+    height: 30px;
+}
+
+.nav-item {
+    height: 30px;
+}
+
+#endTurnButton {
+    background-color: red;
+}
+
+#player {
     position: absolute;
-    bottom: 0;
-    left: 30%;
-    bottom: 0;
+    bottom: -12px;
+    left: 28%;
     text-align: center;
+}
+
+#playername {
+    height: 5px;
+    width: 40px;
 }
 
 #table {
@@ -51,6 +74,8 @@ img {
     left: 1200px;
     top: -400px;
     border-radius: 20px;
+    border: 0 solid transparent;
+    border-collapse: collapse;
 
 }
 
@@ -84,7 +109,7 @@ img {
 
 #player #playerHand img {
     height: 120px;
-    width: 90px;
+    width: 100px;
 }
 
 #enemy1Role img {
@@ -108,22 +133,22 @@ img {
 }
 
 #enemy2Role img {
-    height: 100px;
-    width: 100px;
+    height: 90px;
+    width: 120px;
 }
 
 #enemy2HP img {
-    height: 100px;
+    height: 90px;
     width: 150px;
 }
 
 #enemy2Blues img {
-    height: 100px;
+    height: 90px;
     width: 60px;
 }
 
 #enemy2Hand img {
-    height: 120px;
+    height: 110px;
     width: 80px;
 }
 
@@ -157,7 +182,7 @@ img {
     float: left;
     text-align: center;
     margin-top: 20%;
-    margin-left: -10%;
+    margin-left: -7%;
 }
 
 #enemy2 {
@@ -168,8 +193,8 @@ img {
     transform: rotate(180deg);
     float: top;
     text-align: center;
-    margin-top: 0%;
-    margin-right: 30%;
+    margin-top: 0;
+    margin-right: 28%;
     border: 0;
 }
 
@@ -192,5 +217,5 @@ img {
     float: right;
     text-align: center;
     margin-top: 20%;
-    margin-right: -8%;
+    margin-right: -5%;
 }
