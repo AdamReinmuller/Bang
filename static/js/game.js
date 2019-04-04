@@ -122,13 +122,37 @@ class Cards {
 }
 
 
+function enemyUpdate(enemy) {
+//enemy2
+    //cardsImage
+    document.getElementById('enemy'+enemy.id+'Hand').innerHTML = `
+    ${enemy.hand.getBackSide().map(getImage).join('')}
+    `;
+    //HPImage
+    document.getElementById('enemy'+enemy.id+'HP').innerHTML = `
+    ${getImage(enemy.getHpImage())}
+    `;
+    //roleImage
+    if (enemy.role === 'Sheriff') {
+        document.getElementById('enemy'+enemy.id+'Role').innerHTML = `
+        ${getImage(enemy.roleImage)}
+        `
+    } else {
+        document.getElementById('enemy'+enemy.id+'Role').innerHTML = `
+        ${getImage(enemy.roleImageBackSide)}
+        `
+    }
+    //names
+    document.getElementById('enemy'+enemy.id+'Name').innerText = `
+    ${enemy.name}
+    `;
+}
+
 function updateDOM(){
 
-    function getImage(src) {
-        return `
+    const getImage = src => `
     <img src="/${src}" alt="">
-    `
-    }
+    `;
 
 
     //currentPlayer
@@ -150,82 +174,10 @@ function updateDOM(){
     `;
 
 
-    //enemy1
-    //cardsImage
-    document.getElementById('enemy1Hand').innerHTML = `
-    ${enemy1.hand.getBackSide().map(getImage).join('')}
-    `;
-    //HPImage
-    document.getElementById('enemy1HP').innerHTML = `
-    ${getImage(enemy1.getHpImage())}
-    `;
-    //roleImage
-    if (enemy1.role === 'Sheriff') {
-        document.getElementById('enemy1Role').innerHTML = `
-        ${getImage(enemy1.roleImage)}
-        `
-    }
-    else {
-        document.getElementById('enemy1Role').innerHTML = `
-        ${getImage(enemy1.roleImageBackSide)}
-        `
-    }
-    //names
-    document.getElementById('enemy1Name').innerText = `
-    ${enemy1.name}
-    `;
+    enemyUpdate(enemy1);
+    enemyUpdate(enemy2);
+    enemyUpdate(enemy3);
 
-
-    //enemy2
-    //cardsImage
-    document.getElementById('enemy2Hand').innerHTML = `
-    ${enemy2.hand.getBackSide().map(getImage).join('')}
-    `;
-    //HPImage
-    document.getElementById('enemy2HP').innerHTML = `
-    ${getImage(enemy2.getHpImage())}
-    `;
-    //roleImage
-    if (enemy2.role === 'Sheriff') {
-        document.getElementById('enemy2Role').innerHTML = `
-        ${getImage(enemy2.roleImage)}
-        `
-    }
-    else {
-        document.getElementById('enemy2Role').innerHTML = `
-        ${getImage(enemy2.roleImageBackSide)}
-        `
-    }
-    //names
-    document.getElementById('enemy2Name').innerText = `
-    ${enemy2.name}
-    `;
-
-
-    //enemy3
-    //cardsImage
-    document.getElementById('enemy3Hand').innerHTML = `
-    ${enemy3.hand.getBackSide().map(getImage).join('')}
-    `;
-    //HPImage
-    document.getElementById('enemy3HP').innerHTML = `
-    ${getImage(enemy3.getHpImage())}
-    `;
-    //roleImage
-    if (enemy3.role === 'Sheriff') {
-        document.getElementById('enemy3Role').innerHTML = `
-        ${getImage(enemy3.roleImage)}
-        `
-    }
-    else {
-        document.getElementById('enemy3Role').innerHTML = `
-        ${getImage(enemy3.roleImageBackSide)}
-        `
-    }
-    //names
-    document.getElementById('enemy3Name').innerText = `
-    ${enemy3.name}
-    `;
 }
 
 
@@ -271,19 +223,6 @@ let fullDeck = {
     'missed': 8
 };
 
-let bang2miss2 = {'bang': 2, 'missed': 2};
-let bang1miss1 = {'bang': 1, 'missed': 1};
-
-let players = [];
-let player = new Player('Raj',4, "Renegade", 0, 1, [], bang2miss2);
-players.push(player);
-let enemy1 = new Player('Kristóf',3, "Bandit", 1, 1, [], bang2miss2);
-players.push(enemy1);
-let enemy2 = new Player('Simó',2, "Sheriff", 2, 1, [], bang1miss1);
-players.push(enemy2);
-let enemy3 = new Player('Dombi',1, "Deputy", 1, 1, [], bang1miss1);
-players.push(enemy3);
-
 function eventListenerVariablesForCardZoom() {
 
     let playerCards = document.getElementById('playerHand');
@@ -320,72 +259,76 @@ function eventListenerVariablesForCardZoom() {
     });
 
 
-updateDOM();
+    updateDOM();
 
 
-let cards = document.getElementById('playerHand');
-cards.addEventListener('click', function(e){
-    if (e.target.tagName === 'IMG' && e.target.getAttribute('src') === '/static/images/bang.png') {
-        alert('sessionstorage: bang');
-        sessionStorage.setItem('card', 'bang');
-    }
-});
+    let cards = document.getElementById('playerHand');
+    cards.addEventListener('click', function(e){
+        if (e.target.tagName === 'IMG' && e.target.getAttribute('src') === '/static/images/bang.png') {
+            alert('sessionstorage: bang');
+            sessionStorage.setItem('card', 'bang');
+        }
+    });
     // else if(card.outerHTML === `<img src="/static/images/miss.png" alt="">`) {
     //     card.addEventListener('click', dodgeBang)
     // }
 
-document.querySelector('#cardZoom img').addEventListener('click', function () {
-    alert('sessionstorage: cleared');
-    sessionStorage.clear();
-});
-
-
-document.getElementById('enemy1').addEventListener('click', function () {
-    if (sessionStorage.getItem('card') === 'bang'){
+    document.querySelector('#cardZoom img').addEventListener('click', function () {
+        alert('sessionstorage: cleared');
         sessionStorage.clear();
-        player.bang(enemy1);
-        updateDOM();
+    });
 
-    }
-});
-document.getElementById('enemy2').addEventListener('click', function () {
-    if (sessionStorage.getItem('card') === 'bang'){
-        sessionStorage.clear();
-        player.bang(enemy2);
-        updateDOM();
-    }
-});
-document.getElementById('enemy3').addEventListener('click', function () {
-    if (sessionStorage.getItem('card') === 'bang'){
-        sessionStorage.clear();
-        player.bang(enemy3);
-        updateDOM();
-    }
-});
 
-playerCards.addEventListener('mouseover', function (e) {
-        if (targetZoom.dataset.enableHoover === 'true') {
-            if (e.target.tagName === 'IMG') {
-                console.log('hoover over event');
-                let handCard = e.target;
-                let handCardSrc = handCard.getAttribute('src');
-                zoomCardToReplace.setAttribute("src", handCardSrc);
-            }
-
+    let listener = function () {
+        if (sessionStorage.getItem('card') === 'bang'){
+            sessionStorage.clear();
+            player.bang(e.currentTarget...); // TODO get given enemy
+            document.querySelector('#cardZoom img').setAttribute('src', ' ');
+            document.querySelector('#cardZoom').dataset.enableHoover = 'true';
+            updateDOM();
         }
-    }
-);
+    };
 
-playerCards.addEventListener('mouseout', function (e) {
-        if (targetZoom.dataset.enableHoover === 'true') {
-            if (e.target.tagName === 'IMG') {
-                console.log('hoover out event');
-                zoomCardToReplace.setAttribute("src", ' ');
+    document.getElementById('enemy1').addEventListener('click', listener);
+    document.getElementById('enemy2').addEventListener('click', listener);
+    document.getElementById('enemy3').addEventListener('click', listener);
+    document.getElementById('enemy4').addEventListener('click', listener);
+
+    playerCards.addEventListener('mouseover', function (e) {
+            if (targetZoom.dataset.enableHoover === 'true') {
+                if (e.target.tagName === 'IMG') {
+                    console.log('hoover over event');
+                    let handCard = e.target;
+                    let handCardSrc = handCard.getAttribute('src');
+                    zoomCardToReplace.setAttribute("src", handCardSrc)
+                }
             }
         }
-    }
-);
+    );
+
+    playerCards.addEventListener('mouseout', function (e) {
+            if (targetZoom.dataset.enableHoover === 'true') {
+                if (e.target.tagName === 'IMG') {
+                    console.log('hoover out event');
+                    zoomCardToReplace.setAttribute("src", ' ');
+                }
+            }
+        }
+    );
 
 }
+
+let bang2miss2 = {'bang': 2, 'missed': 2};
+let bang1miss1 = {'bang': 1, 'missed': 1};
+let players = [];
+let player = new Player('Raj',4, "Renegade", 0, 1, [], bang2miss2);
+players.push(player);
+let enemy1 = new Player('Kristóf',3, "Bandit", 1, 1, [], bang2miss2);
+players.push(enemy1);
+let enemy2 = new Player('Simó',2, "Sheriff", 2, 1, [], bang1miss1);
+players.push(enemy2);
+let enemy3 = new Player('Dombi',1, "Deputy", 1, 1, [], bang1miss1);
+
+players.push(enemy3);
 
 eventListenerVariablesForCardZoom();
