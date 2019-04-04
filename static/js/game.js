@@ -1,12 +1,3 @@
-function shuffleCards(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-    }
-    return array;
-}
-
-
 class Player { //cards: dictionary
     constructor(name, hp, role, distance, range, features, cards) {
         this.name = name;
@@ -16,22 +7,24 @@ class Player { //cards: dictionary
         this.roleImageBackSide = 'static/images/rolebackside.png';
         this.range = range;
         this.features = features;
-        this.distance = this.getMustang() + distance;
+        this.distance = distance;
         this.hand = new Cards(cards);
     }
 
-    getMustang() {
+    getDistance() {
         if (this.features.includes('Mustang')) {
             return 1
+        } else {
+            return 0
         }
-        else {return 0}
     }
 
     sheriffHp() {
         if (this.role === 'Sheriff') {
             return 1
+        } else {
+            return 0
         }
-        else {return 0}
     }
 
     getHpImage() {
@@ -41,14 +34,11 @@ class Player { //cards: dictionary
     getRoleImage() {
         if (this.role === 'Sheriff') {
             return `static/images/sheriff.png`
-        }
-        else if (this.role === 'Renegade') {
+        } else if (this.role === 'Renegade') {
             return 'static/images/renegade.png'
-        }
-        else if (this.role === 'Bandit') {
+        } else if (this.role === 'Bandit') {
             return 'static/images/bandit.png'
-        }
-        else {
+        } else {
             return 'static/images/deputy.png'
         }
     }
@@ -58,8 +48,7 @@ class Player { //cards: dictionary
             target.hp -= 1;
             this.removeCard('bang');
             alert(this.name + ' banged ' + target.name + ' successfully')
-        }
-        else {
+        } else {
             alert('Out of range')
         }
     };
@@ -122,38 +111,55 @@ class Cards {
 }
 
 
-function enemyUpdate(enemy) {
-//enemy2
-    //cardsImage
-    document.getElementById('enemy'+enemy.id+'Hand').innerHTML = `
-    ${enemy.hand.getBackSide().map(getImage).join('')}
-    `;
-    //HPImage
-    document.getElementById('enemy'+enemy.id+'HP').innerHTML = `
-    ${getImage(enemy.getHpImage())}
-    `;
-    //roleImage
-    if (enemy.role === 'Sheriff') {
-        document.getElementById('enemy'+enemy.id+'Role').innerHTML = `
-        ${getImage(enemy.roleImage)}
-        `
-    } else {
-        document.getElementById('enemy'+enemy.id+'Role').innerHTML = `
-        ${getImage(enemy.roleImageBackSide)}
-        `
+function shuffleCards(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
     }
-    //names
-    document.getElementById('enemy'+enemy.id+'Name').innerText = `
-    ${enemy.name}
-    `;
+    return array;
 }
 
-function updateDOM(){
+
+function enemyUpdate(enemy) {
 
     const getImage = src => `
     <img src="/${src}" alt="">
     `;
 
+    //cardsImage
+    document.getElementById('enemy' + enemy.id + 'Hand').innerHTML = `
+    ${enemy.hand.getBackSide().map(getImage).join('')}
+    `;
+    //HPImage
+    document.getElementById('enemy' + enemy.id + 'HP').innerHTML = `
+    ${getImage(enemy.getHpImage())}
+    `;
+    //roleImage
+    if (enemy.role === 'Sheriff') {
+        document.getElementById('enemy' + enemy.id + 'Role').innerHTML = `
+        ${getImage(enemy.roleImage)}
+        `
+    } else {
+        document.getElementById('enemy' + enemy.id + 'Role').innerHTML = `
+        ${getImage(enemy.roleImageBackSide)}
+        `
+    }
+    //names
+    document.getElementById('enemy' + enemy.id + 'Name').innerText = `
+    ${enemy.name}
+    `;
+}
+
+
+function updateDOM(players) {
+
+    const getImage = src => `
+    <img src="/${src}" alt="">
+    `;
+    let player = players.slot0;
+    let enemy1 = players.slot1;
+    let enemy2 = players.slot2;
+    let enemy3 = players.slot3;
 
     //currentPlayer
     //cardsImage
@@ -181,17 +187,18 @@ function updateDOM(){
 }
 
 
-function rotatePlayers(){
-//switches the players in clockwise fashion and updates their distance
-    let temp = player;
-    player = enemy3;
-    player.distance = 0;
-    enemy3 = enemy2;
-    enemy3.distance = 1;
-    enemy2 = enemy1;
-    enemy2.distance = 2;
-    enemy1 = temp;
-    enemy3.distance = 1;
+function rotatePlayers(players) {
+    //switches the players in clockwise fashion and updates their distance
+    let temp0 = players.slot0;
+    let temp1 = players.slot1;
+    let temp2 = players.slot2;
+    let temp3 = players.slot3;
+    let temp = {'slot0': temp0, 'slot1': temp1, 'slot2': temp2, 'slot3': temp3};
+    temp.slot0.distance = temp.slot0.getDistance();
+    temp.slot3.distance = 1 + temp.slot1.getDistance();
+    temp.slot2.distance = 2 + temp.slot2.getDistance();
+    temp.slot3.distance = 1 + temp.slot3.getDistance();
+    return temp
 }
 
 
@@ -202,28 +209,16 @@ function switchTwoPlayer(enemy) {
 
 }
 
+
 function switchBackPlayers() {
     let temp = player;
     player = enemy;
     player.distance = 0;
     enemy = player;
-
-    cheatCode.addEventListener("click", function () {
-        player = new Player('Raj', 1, "Renegade", 1, 1, 4, bang2miss2);
-        enemy1 = new Player('Kristóf', 2, "Bandit", 3, 1, 4, bang2miss2);
-        enemy2 = new Player('Simó', 3, "Sheriff", 0, 1, 4, bang1miss1);
-        enemy3 = new Player('Dombi', 4, "Deputy", 2, 1, 4, bang1miss1);
-        location.reload();
-        player.name = "Lófasz";
-    })
 }
 
-let fullDeck = {
-    'bang': 8,
-    'missed': 8
-};
 
-function eventListenerVariablesForCardZoom() {
+function addEventListeners() {
 
     let playerCards = document.getElementById('playerHand');
     let zoomCardToReplace = document.querySelector('#cardZoom img');
@@ -259,11 +254,8 @@ function eventListenerVariablesForCardZoom() {
     });
 
 
-    updateDOM();
-
-
     let cards = document.getElementById('playerHand');
-    cards.addEventListener('click', function(e){
+    cards.addEventListener('click', function (e) {
         if (e.target.tagName === 'IMG' && e.target.getAttribute('src') === '/static/images/bang.png') {
             alert('sessionstorage: bang');
             sessionStorage.setItem('card', 'bang');
@@ -279,20 +271,29 @@ function eventListenerVariablesForCardZoom() {
     });
 
 
-    let listener = function () {
-        if (sessionStorage.getItem('card') === 'bang'){
+    function getPlayerOfId(id) {
+        let players = getPlayers();
+        return players['slot' + id];
+    }
+
+
+    function bangListener() {
+        if (sessionStorage.getItem('card') === 'bang') {
             sessionStorage.clear();
-            player.bang(e.currentTarget...); // TODO get given enemy
+            let player = getPlayers().slot0;
+            let target = getPlayerOfId(e.currentTarget.id);
+            player.bang(target);
             document.querySelector('#cardZoom img').setAttribute('src', ' ');
             document.querySelector('#cardZoom').dataset.enableHoover = 'true';
             updateDOM();
         }
-    };
+    }
 
-    document.getElementById('enemy1').addEventListener('click', listener);
-    document.getElementById('enemy2').addEventListener('click', listener);
-    document.getElementById('enemy3').addEventListener('click', listener);
-    document.getElementById('enemy4').addEventListener('click', listener);
+
+    for (let i = 1; i <= 3; i++) {
+        document.getElementById(`enemy${i}`).addEventListener('click', bangListener);
+    }
+
 
     playerCards.addEventListener('mouseover', function (e) {
             if (targetZoom.dataset.enableHoover === 'true') {
@@ -318,17 +319,19 @@ function eventListenerVariablesForCardZoom() {
 
 }
 
-let bang2miss2 = {'bang': 2, 'missed': 2};
-let bang1miss1 = {'bang': 1, 'missed': 1};
-let players = [];
-let player = new Player('Raj',4, "Renegade", 0, 1, [], bang2miss2);
-players.push(player);
-let enemy1 = new Player('Kristóf',3, "Bandit", 1, 1, [], bang2miss2);
-players.push(enemy1);
-let enemy2 = new Player('Simó',2, "Sheriff", 2, 1, [], bang1miss1);
-players.push(enemy2);
-let enemy3 = new Player('Dombi',1, "Deputy", 1, 1, [], bang1miss1);
 
-players.push(enemy3);
+function getPlayers() {
+    let bang2miss2 = {'bang': 2, 'missed': 2};
+    let bang1miss1 = {'bang': 1, 'missed': 1};
+    let player = new Player('Raj', 4, "Renegade", 0, 1, [], bang2miss2);
+    let enemy1 = new Player('Kristóf', 3, "Bandit", 1, 1, [], bang2miss2);
+    let enemy2 = new Player('Simó', 2, "Sheriff", 2, 1, [], bang1miss1);
+    let enemy3 = new Player('Dombi', 1, "Deputy", 1, 1, [], bang1miss1);
+    return {'slot0': player, 'slot1': enemy1, 'slot2': enemy2, 'slot3': enemy3};
+}
 
-eventListenerVariablesForCardZoom();
+
+addEventListeners();
+let players = getPlayers();
+players = rotatePlayers(players);
+updateDOM(players);
