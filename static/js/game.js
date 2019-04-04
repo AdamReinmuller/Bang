@@ -362,30 +362,29 @@ document.getElementById('enemy3').addEventListener('click', function () {
         updateDOM();
     }
 });
-// player.bang(enemy1);
 
-    playerCards.addEventListener('mouseover', function (e) {
-            if (targetZoom.dataset.enableHoover === 'true') {
-                if (e.target.tagName === 'IMG') {
-                    console.log('hoover over event');
-                    let handCard = e.target;
-                    let handCardSrc = handCard.getAttribute('src');
-                    zoomCardToReplace.setAttribute("src", handCardSrc);
-                }
+playerCards.addEventListener('mouseover', function (e) {
+        if (targetZoom.dataset.enableHoover === 'true') {
+            if (e.target.tagName === 'IMG') {
+                console.log('hoover over event');
+                let handCard = e.target;
+                let handCardSrc = handCard.getAttribute('src');
+                zoomCardToReplace.setAttribute("src", handCardSrc);
+            }
 
+        }
+    }
+);
+
+playerCards.addEventListener('mouseout', function (e) {
+        if (targetZoom.dataset.enableHoover === 'true') {
+            if (e.target.tagName === 'IMG') {
+                console.log('hoover out event');
+                zoomCardToReplace.setAttribute("src", ' ');
             }
         }
-    );
-
-    playerCards.addEventListener('mouseout', function (e) {
-            if (targetZoom.dataset.enableHoover === 'true') {
-                if (e.target.tagName === 'IMG') {
-                    console.log('hoover out event');
-                    zoomCardToReplace.setAttribute("src", ' ');
-                }
-            }
-        }
-    );
+    }
+);
 
 }
 
