@@ -242,13 +242,6 @@ function rotatePlayers(){
     enemy3.distance = 1;
 }
 
-function getEnemyDoms() {
-    let enemyDoms = [];
-    enemyDoms.push(document.getElementById('enemy1'));
-    enemyDoms.push(document.getElementById('enemy2'));
-    enemyDoms.push(document.getElementById('enemy3'));
-    return enemyDoms
-}
 
 let fullDeck = {
     'bang': 8,
@@ -273,37 +266,38 @@ players.push(enemy3);
 updateDOM();
 
 
-function addToLocalstorage() {
-    alert('localstorage set');
-    localStorage.setItem('card', 'bang')
-}
-function clearLocalstorage() {
-    localStorage.clear()
-}
-
-
-
-let cards = document.getElementById('playerHand').children;
-for (card of cards) {
-    if (card.outerHTML === `<img src="/static/images/bang.png" alt="">`) {
-        card.addEventListener('click', addToLocalstorage)
+let cards = document.getElementById('playerHand');
+cards.addEventListener('click', function(e){
+    if (e.target.tagName === 'IMG' && e.target.getAttribute('src') === '/static/images/bang.png') {
+        localStorage.setItem('card', 'bang');
     }
+});
     // else if(card.outerHTML === `<img src="/static/images/miss.png" alt="">`) {
     //     card.addEventListener('click', dodgeBang)
     // }
-}
 
-// document.querySelector('#cardZoom img').addEventListener('click', function () {
-//     localStorage.clear()
-// });
+document.querySelector('#cardZoom img').addEventListener('click', function () {
+    localStorage.clear();
+});
 
-let enemyDoms = getEnemyDoms();
 
-for (let enemy of enemyDoms) {
-    enemy.addEventListener('click', function() {
-        if (localStorage.getItem('card') === 'bang') {
-            player.bang(event.target)
-        }
-    })
-}
+document.getElementById('enemy1').addEventListener('click', function () {
+    if (localStorage.getItem('card') === 'bang'){
+        player.bang(enemy1)}
+        localStorage.clear()
+});
+document.getElementById('enemy2').addEventListener('click', function () {
+    if (localStorage.getItem('card') === 'bang'){
+        player.bang(enemy2)}
+        localStorage.clear()
+});
+document.getElementById('enemy3').addEventListener('click', function () {
+    if (localStorage.getItem('card') === 'bang'){
+        player.bang(enemy3)}
+        localStorage.clear()
+});
+// player.bang(enemy1);
+
 updateDOM();
+
+
