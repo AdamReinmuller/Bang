@@ -243,6 +243,21 @@ function rotatePlayers(){
 }
 
 
+function switchTwoPlayer(enemy) {
+    let temp = player;
+    player = enemy;
+
+
+}
+
+function switchBackPlayers() {
+    let temp = player;
+    player = enemy;
+    player.distance = 0;
+    enemy = player;
+
+}
+
 let fullDeck = {
     'bang': 8,
     'missed': 8
@@ -269,7 +284,8 @@ updateDOM();
 let cards = document.getElementById('playerHand');
 cards.addEventListener('click', function(e){
     if (e.target.tagName === 'IMG' && e.target.getAttribute('src') === '/static/images/bang.png') {
-        localStorage.setItem('card', 'bang');
+        alert('sessionstorage: bang');
+        sessionStorage.setItem('card', 'bang');
     }
 });
     // else if(card.outerHTML === `<img src="/static/images/miss.png" alt="">`) {
@@ -277,27 +293,32 @@ cards.addEventListener('click', function(e){
     // }
 
 document.querySelector('#cardZoom img').addEventListener('click', function () {
-    localStorage.clear();
+    alert('sessionstorage: cleared');
+    sessionStorage.clear();
 });
 
 
 document.getElementById('enemy1').addEventListener('click', function () {
-    if (localStorage.getItem('card') === 'bang'){
-        player.bang(enemy1)}
-        localStorage.clear()
+    if (sessionStorage.getItem('card') === 'bang'){
+        sessionStorage.clear();
+        player.bang(enemy1);
+        updateDOM();
+
+    }
 });
 document.getElementById('enemy2').addEventListener('click', function () {
-    if (localStorage.getItem('card') === 'bang'){
-        player.bang(enemy2)}
-        localStorage.clear()
+    if (sessionStorage.getItem('card') === 'bang'){
+        sessionStorage.clear();
+        player.bang(enemy2);
+        updateDOM();
+    }
 });
 document.getElementById('enemy3').addEventListener('click', function () {
-    if (localStorage.getItem('card') === 'bang'){
-        player.bang(enemy3)}
-        localStorage.clear()
+    if (sessionStorage.getItem('card') === 'bang'){
+        sessionStorage.clear();
+        player.bang(enemy3);
+        updateDOM();
+    }
 });
 // player.bang(enemy1);
-
-updateDOM();
-
 
