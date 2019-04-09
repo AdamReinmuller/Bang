@@ -120,37 +120,6 @@ function shuffleCards(array) {
 }
 
 
-function enemyUpdate(enemy) {
-
-    const getImage = src => `
-    <img src="/${src}" alt="">
-    `;
-
-    //cardsImage
-    document.getElementById('enemy' + enemy.id + 'Hand').innerHTML = `
-    ${enemy.hand.getBackSide().map(getImage).join('')}
-    `;
-    //HPImage
-    document.getElementById('enemy' + enemy.id + 'HP').innerHTML = `
-    ${getImage(enemy.getHpImage())}
-    `;
-    //roleImage
-    if (enemy.role === 'Sheriff') {
-        document.getElementById('enemy' + enemy.id + 'Role').innerHTML = `
-        ${getImage(enemy.roleImage)}
-        `
-    } else {
-        document.getElementById('enemy' + enemy.id + 'Role').innerHTML = `
-        ${getImage(enemy.roleImageBackSide)}
-        `
-    }
-    //names
-    document.getElementById('enemy' + enemy.id + 'Name').innerText = `
-    ${enemy.name}
-    `;
-}
-
-
 function updateDOM(players) {
 
     const getImage = src => `
@@ -180,9 +149,82 @@ function updateDOM(players) {
     `;
 
 
-    enemyUpdate(enemy1);
-    enemyUpdate(enemy2);
-    enemyUpdate(enemy3);
+    //enemy1
+    //cardsImage
+    document.getElementById('enemy1Hand').innerHTML = `
+    ${enemy1.hand.getBackSide().map(getImage).join('')}
+    `;
+    //HPImage
+    document.getElementById('enemy1HP').innerHTML = `
+    ${getImage(enemy1.getHpImage())}
+    `;
+    //roleImage
+    if (enemy1.role === 'Sheriff') {
+        document.getElementById('enemy1Role').innerHTML = `
+        ${getImage(enemy1.roleImage)}
+        `
+    }
+    else {
+        document.getElementById('enemy1Role').innerHTML = `
+        ${getImage(enemy1.roleImageBackSide)}
+        `
+    }
+    //names
+    document.getElementById('enemy1Name').innerText = `
+    ${enemy1.name}
+    `;
+
+
+    //enemy2
+    //cardsImage
+    document.getElementById('enemy2Hand').innerHTML = `
+    ${enemy2.hand.getBackSide().map(getImage).join('')}
+    `;
+    //HPImage
+    document.getElementById('enemy2HP').innerHTML = `
+    ${getImage(enemy2.getHpImage())}
+    `;
+    //roleImage
+    if (enemy2.role === 'Sheriff') {
+        document.getElementById('enemy2Role').innerHTML = `
+        ${getImage(enemy2.roleImage)}
+        `
+    }
+    else {
+        document.getElementById('enemy2Role').innerHTML = `
+        ${getImage(enemy2.roleImageBackSide)}
+        `
+    }
+    //names
+    document.getElementById('enemy2Name').innerText = `
+    ${enemy2.name}
+    `;
+
+
+    //enemy3
+    //cardsImage
+    document.getElementById('enemy3Hand').innerHTML = `
+    ${enemy3.hand.getBackSide().map(getImage).join('')}
+    `;
+    //HPImage
+    document.getElementById('enemy3HP').innerHTML = `
+    ${getImage(enemy3.getHpImage())}
+    `;
+    //roleImage
+    if (enemy3.role === 'Sheriff') {
+        document.getElementById('enemy3Role').innerHTML = `
+        ${getImage(enemy3.roleImage)}
+        `
+    }
+    else {
+        document.getElementById('enemy3Role').innerHTML = `
+        ${getImage(enemy3.roleImageBackSide)}
+        `
+    }
+    //names
+    document.getElementById('enemy3Name').innerText = `
+    ${enemy3.name}
+    `;
 
 }
 
@@ -193,7 +235,7 @@ function rotatePlayers(players) {
     let temp1 = players.slot1;
     let temp2 = players.slot2;
     let temp3 = players.slot3;
-    let temp = {'slot0': temp0, 'slot1': temp1, 'slot2': temp2, 'slot3': temp3};
+    let temp = {'slot0': temp3, 'slot1': temp0, 'slot2': temp1, 'slot3': temp2};
     temp.slot0.distance = temp.slot0.getDistance();
     temp.slot3.distance = 1 + temp.slot1.getDistance();
     temp.slot2.distance = 2 + temp.slot2.getDistance();
@@ -218,7 +260,7 @@ function switchBackPlayers() {
 }
 
 
-function addEventListeners() {
+function addEventListeners(players) {
 
     let playerCards = document.getElementById('playerHand');
     let zoomCardToReplace = document.querySelector('#cardZoom img');
@@ -233,8 +275,6 @@ function addEventListeners() {
                 zoomCardToReplace.setAttribute("src", handCardSrc);
                 handCard.remove();
                 targetZoom.dataset.enableHoover = 'false';
-
-
             }
         }
     });
@@ -272,20 +312,29 @@ function addEventListeners() {
 
 
     function getPlayerOfId(id) {
-        let players = getPlayers();
-        return players['slot' + id];
+        if (id === 'player') {
+            return players.slot1;
+        }
+        else if (id === 'enemy1') {
+            return players.slot1;
+        }
+        else if (id === 'enemy2') {
+            return players.slot2;
+        }
+        else if (id === 'enemy3') {
+            return players.slot3;
+        }
     }
 
 
-    function bangListener() {
+    function bangListener(e) {
         if (sessionStorage.getItem('card') === 'bang') {
-            sessionStorage.clear();
             let player = getPlayers().slot0;
             let target = getPlayerOfId(e.currentTarget.id);
             player.bang(target);
             document.querySelector('#cardZoom img').setAttribute('src', ' ');
             document.querySelector('#cardZoom').dataset.enableHoover = 'true';
-            updateDOM();
+            updateDOM(players);
         }
     }
 
@@ -330,8 +379,6 @@ function getPlayers() {
     return {'slot0': player, 'slot1': enemy1, 'slot2': enemy2, 'slot3': enemy3};
 }
 
-
-addEventListeners();
 let players = getPlayers();
-players = rotatePlayers(players);
+addEventListeners(players);
 updateDOM(players);
